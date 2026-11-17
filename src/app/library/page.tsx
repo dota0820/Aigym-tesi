@@ -37,14 +37,14 @@ function Library() {
 
   return (
     <div>
-      <H1 sub="点开动作看动图示范、练到哪块肌肉;也可贴小红书/FB/YouTube链接导入">动作库</H1>
+      <H1>动作库</H1>
 
       <button
         type="button"
         onClick={() => setShowImport(true)}
-        className={`${btnSoft} mb-3 w-full border border-primary/25`}
+        className={`${btnSoft} mb-3 w-full`}
       >
-        从小红书 / FB / YouTube 链接导入新动作
+        从视频链接导入
       </button>
 
       <div className="-mx-4 mb-2 flex gap-2 overflow-x-auto px-4 pb-1">
@@ -57,7 +57,7 @@ function Library() {
               g === x.id ? "bg-primary text-white" : "border border-line bg-card"
             }`}
           >
-            {x.emoji} {x.label}
+            {x.label}
             {x.id === "custom" && customExercises.length > 0 ? `(${customExercises.length})` : ""}
           </button>
         ))}
@@ -128,7 +128,7 @@ function Library() {
                   <span className="mt-1 flex flex-wrap gap-1">
                     {custom && (
                       <span className="rounded-full bg-mint-soft px-2 py-0.5 text-[11px] font-semibold text-mint">
-                        {e.sourcePlatform ? `🔗 ${e.sourcePlatform}` : "自定义"}
+                        {e.sourcePlatform ? e.sourcePlatform : "自定义"}
                       </span>
                     )}
                     {sLabel && (

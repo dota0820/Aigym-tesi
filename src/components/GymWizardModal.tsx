@@ -199,7 +199,7 @@ export default function GymWizardModal({
     });
     setScanNotice(
       chosen.length > 0
-        ? `✓ 已确认并加入 ${chosen.length} 项：${chosen.join("、")}（可继续拍下一张，或点下一步）`
+        ? `已确认并加入 ${chosen.length} 项：${chosen.join("、")}（可继续拍下一张，或点下一步）`
         : "已取消本次识别结果。",
     );
     setPendingScan(null);
@@ -258,14 +258,14 @@ export default function GymWizardModal({
               取消
             </button>
             <div className="text-center">
-              <div className="text-sm font-bold">{draft.name.trim() || "健身房"}</div>
+              <div className="text-sm font-semibold">{draft.name.trim() || "健身房"}</div>
               <div className="text-[11px] text-sub">
                 第 {step + 1} / {STEPS.length} 步 · {currentStep.title} · 已选 {selected.length} 项
               </div>
             </div>
             <button
               type="button"
-              className="rounded-xl bg-primary px-3 py-1 text-xs font-bold text-white"
+              className="rounded-xl bg-primary px-3 py-1 text-xs font-semibold text-white"
               onClick={saveAndClose}
             >
               保存 ✓
@@ -320,7 +320,7 @@ export default function GymWizardModal({
                     >
                       <span className="text-2xl leading-none">{p.emoji}</span>
                       <div className="min-w-0 flex-1">
-                        <div className="text-sm font-bold">{p.label}</div>
+                        <div className="text-sm font-semibold">{p.label}</div>
                         <div className="mt-0.5 text-xs text-sub">{p.desc}</div>
                       </div>
                     </button>
@@ -333,7 +333,7 @@ export default function GymWizardModal({
           {currentStep.id === "photo" && (
             <div className="space-y-4">
               <div>
-                <h2 className="text-base font-bold">不确定器械叫什么？拍照让 AI 帮你确认</h2>
+                <h2 className="text-base font-semibold">不确定器械叫什么？拍照让 AI 帮你确认</h2>
                 <p className="mt-1 text-xs leading-relaxed text-sub">
                   对着不认识的机器或健身房角落拍一张照，AI 会认出名字和用途，列出来让你打勾确认后再加入。都认识的话可以直接点「下一步」。
                 </p>
@@ -346,7 +346,7 @@ export default function GymWizardModal({
                 className="flex w-full flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-primary/40 bg-white px-4 py-6 text-center active:bg-bg disabled:opacity-50"
               >
                 <span className="text-2xl">{busy ? "⏳" : "📷"}</span>
-                <span className="text-sm font-bold text-primary">
+                <span className="text-sm font-semibold text-primary">
                   {busy ? "AI 正在识别照片里的器械…" : "拍照 / 从相册选图让 AI 识别"}
                 </span>
                 <span className="text-xs text-sub">识别后会先给你看清单，你点确认才会加入</span>
@@ -366,8 +366,8 @@ export default function GymWizardModal({
 
               {pendingScan && (
                 <div className="space-y-3 rounded-2xl border-2 border-primary bg-white p-3.5">
-                  <div className="text-xs font-bold text-primary">
-                    🧐 AI 认出了以下器械，请确认哪些要加入：
+                  <div className="text-xs font-semibold text-primary">
+                    AI 认出了以下器械，请确认哪些要加入：
                   </div>
                   <p className="text-xs text-sub">{pendingScan.summary}</p>
                   <div className="space-y-1.5">
@@ -393,11 +393,11 @@ export default function GymWizardModal({
                             on ? "border-primary bg-primary/5" : "border-line bg-bg opacity-60"
                           }`}
                         >
-                          <span className="mt-0.5 text-sm font-bold text-primary">
+                          <span className="mt-0.5 text-sm font-semibold text-primary">
                             {on ? "☑" : "☐"}
                           </span>
                           <div className="min-w-0 flex-1">
-                            <div className="font-bold text-ink">
+                            <div className="font-semibold text-ink">
                               {item}
                               {spec ? ` (${spec})` : ""}
                             </div>
@@ -420,7 +420,7 @@ export default function GymWizardModal({
                       className={`${btnPrimary} flex-1 py-2 text-xs`}
                       onClick={confirmPendingScan}
                     >
-                      ✓ 确认加入 (
+                      确认加入 (
                       {pendingScan.candidates.filter((c) => pendingScan.checked[c]).length} 项)
                     </button>
                   </div>
@@ -435,7 +435,7 @@ export default function GymWizardModal({
                 <div key={cat.id} className="space-y-2.5">
                   <div className="flex items-baseline justify-between gap-2">
                     <div>
-                      <div className="text-sm font-bold">{cat.label}</div>
+                      <div className="text-sm font-semibold">{cat.label}</div>
                       <div className="mt-0.5 text-xs text-sub">{cat.question}</div>
                     </div>
                     <button
@@ -464,7 +464,7 @@ export default function GymWizardModal({
                               : "border-line bg-white text-ink active:bg-bg"
                           }`}
                         >
-                          <span className="text-sm font-bold leading-snug">
+                          <span className="text-sm font-semibold leading-snug">
                             {on ? "✓ " : ""}
                             {item}
                           </span>
@@ -479,7 +479,7 @@ export default function GymWizardModal({
                           )}
                           {on && spec && (
                             <span className="mt-1 rounded bg-white/20 px-1.5 py-0.5 text-[10px] font-semibold">
-                              📌 {spec}
+                              {spec}
                             </span>
                           )}
                         </button>
@@ -500,7 +500,7 @@ export default function GymWizardModal({
                         className="space-y-2 rounded-2xl bg-card p-3"
                       >
                         <div className="flex items-center justify-between gap-2">
-                          <span className="text-sm font-bold">
+                          <span className="text-sm font-semibold">
                             {item} · {p.question}
                           </span>
                           {cur && (
@@ -558,7 +558,7 @@ export default function GymWizardModal({
                 onClick={() => setStep(1)}
                 className="w-full rounded-xl border border-dashed border-line bg-white py-2.5 text-center text-xs font-semibold text-primary active:bg-bg"
               >
-                📷 不确定眼前这台机器叫什么？点这里拍照让 AI 帮你认
+                不确定眼前这台机器叫什么？点这里拍照让 AI 帮你认
               </button>
             </div>
           )}
@@ -567,7 +567,7 @@ export default function GymWizardModal({
             <div className="space-y-4">
               <div className="space-y-2 rounded-2xl bg-card p-3.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-sub">
+                  <span className="text-xs font-semibold text-sub">
                     已选器械（{selected.length} 项，点一下移除）
                   </span>
                   {selected.length > 0 && (
@@ -623,7 +623,7 @@ export default function GymWizardModal({
               </div>
 
               <label className="block rounded-2xl bg-card p-3.5">
-                <span className="text-xs font-bold text-sub">补充说明（可选）</span>
+                <span className="text-xs font-semibold text-sub">补充说明（可选）</span>
                 <textarea
                   className={`${input} mt-1.5 text-xs`}
                   rows={3}
@@ -677,7 +677,7 @@ export default function GymWizardModal({
             </button>
           ) : (
             <button type="button" className={`${btnPrimary} flex-1`} onClick={saveAndClose}>
-              ✓ 完成保存
+              完成保存
             </button>
           )}
         </div>

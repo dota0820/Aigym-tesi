@@ -35,16 +35,16 @@ export default function MeAiPage() {
     <SubPage title="AI 模型与 Key">
       <Card className="space-y-3">
         <div className="flex items-center justify-between gap-2">
-          <div className="text-sm font-bold">🔑 OpenRouter API Key</div>
+          <div className="text-sm font-semibold">OpenRouter API Key</div>
           <span
             className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${
               hasAnyKey ? "bg-mint-soft text-mint" : "bg-red-50 text-red-600"
             }`}
           >
             {cfg?.provider === "openrouter"
-              ? "✓ 服务器已配置"
+              ? "服务器已配置"
               : effectiveLocalKey
-                ? "✓ 本机已填写"
+                ? "本机已填写"
                 : "未配置"}
           </span>
         </div>

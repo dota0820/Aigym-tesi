@@ -49,7 +49,7 @@ export default function WatchForm({
         maxHr: j.max_hr ?? value.maxHr,
         source: "screenshot",
       });
-      setMsg("✓ 已从截图读取,请核对一下数字。");
+      setMsg("已从截图读取,请核对一下数字。");
     } catch {
       setMsg("识别失败,请手动填写。");
     } finally {

@@ -26,8 +26,8 @@ export default function ExercisePicker({
   const [showImport, setShowImport] = useState(false);
 
   const tabs: { id: ExtendedLibGroup; label: string }[] = [
-    ...(customExercises.length > 0 ? [{ id: "custom" as const, label: `⭐ 我的(${customExercises.length})` }] : []),
-    { id: "shape", label: "✨ 女生塑形" },
+    ...(customExercises.length > 0 ? [{ id: "custom" as const, label: `我的(${customExercises.length})` }] : []),
+    { id: "shape", label: "女生塑形" },
     ...GROUPS,
   ];
   const list = listAllExercises(g, "", customExercises);
@@ -42,14 +42,14 @@ export default function ExercisePicker({
           aria-label="选择动作"
         >
           <div className="mb-3 flex items-center justify-between gap-2">
-            <h2 className="text-lg font-bold">添加动作</h2>
+            <h2 className="text-lg font-semibold">添加动作</h2>
             <div className="flex items-center gap-3">
               <button
                 type="button"
                 className="rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary"
                 onClick={() => setShowImport(true)}
               >
-                🔗 从视频链接导入
+                从视频链接导入
               </button>
               <button className="text-sm text-sub" onClick={onClose}>
                 关闭
@@ -106,7 +106,7 @@ export default function ExercisePicker({
                         </span>
                       )}
                     </span>
-                    <span className="text-lg font-bold text-primary">+</span>
+                    <span className="text-lg font-semibold text-primary">+</span>
                   </button>
                 </li>
               );

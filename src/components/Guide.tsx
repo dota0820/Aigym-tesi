@@ -53,7 +53,7 @@ export default function Guide({
             {lib.cues.map((c, i) => (
               <li
                 key={i}
-                className="flex items-center gap-3 rounded-2xl bg-primary-soft px-3 py-3 text-[18px] font-bold leading-snug"
+                className="flex items-center gap-3 rounded-2xl bg-primary-soft px-3 py-3 text-[18px] font-semibold leading-snug"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-base text-white">
                   {i + 1}
@@ -74,7 +74,7 @@ export default function Guide({
       </div>
 
       <div className="rounded-2xl bg-mint-soft px-3 py-2.5 text-[16px] leading-relaxed text-mint">
-        <span className="font-bold">哪里该有感觉:</span>
+        <span className="font-semibold">哪里该有感觉:</span>
         {guide.feel}
       </div>
 
@@ -86,7 +86,7 @@ export default function Guide({
         <ol className="space-y-3 px-3 pb-3">
           {guide.steps.map((s, i) => (
             <li key={i} className="flex gap-2.5 text-[17px] leading-[1.7]">
-              <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-soft text-[13px] font-bold text-primary">
+              <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-soft text-[13px] font-semibold text-primary">
                 {i + 1}
               </span>
               <span>{s}</span>
@@ -98,7 +98,7 @@ export default function Guide({
       {guide.mistakes.length > 0 && (
         <details className="group rounded-2xl border border-line">
           <summary className="flex cursor-pointer list-none items-center justify-between px-3 py-3 text-[16px] font-semibold">
-            ⚠️ 常见错误({guide.mistakes.length})
+            常见错误({guide.mistakes.length})
             <span className="text-sub group-open:rotate-180">▾</span>
           </summary>
           <ul className="space-y-2 px-3 pb-3">
@@ -121,7 +121,7 @@ export default function Guide({
                 href={`/detective?exercise=${encodeURIComponent(lib.id)}&q=${encodeURIComponent(`我做${lib.name}(${lib.nameEn || lib.name})的时候,${w}。请用动作侦探流程帮我排查原因并调整。`)}`}
                 className="flex items-center justify-between gap-2 rounded-2xl border border-primary/40 bg-white px-3 py-3 text-[16px] font-semibold text-primary active:scale-[0.99]"
               >
-                <span>🕵️ {w}?</span>
+                <span>{w}?</span>
                 <span className="shrink-0 text-sm">侦探排查 ›</span>
               </Link>
             ))}
@@ -134,7 +134,7 @@ export default function Guide({
           href={`/detective?exercise=${encodeURIComponent(lib.id)}`}
           className="flex items-center justify-between gap-2 rounded-2xl border border-mint/40 bg-mint-soft/50 px-3 py-3 text-[15px] font-semibold text-mint active:scale-[0.99]"
         >
-          <span>🧬 打开「AI 动作侦探」排查发力或上传视频</span>
+          <span>打开「AI 动作侦探」排查发力或上传视频</span>
           <span className="shrink-0 text-sm">进入 ›</span>
         </Link>
       )}

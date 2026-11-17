@@ -73,7 +73,7 @@ function Detail() {
 
   return (
     <div className="space-y-3">
-      <Link href="/history" className="text-sm text-sub">
+      <Link href="/history" className="text-[17px] text-primary">
         ‹ 训练记录
       </Link>
       <header>

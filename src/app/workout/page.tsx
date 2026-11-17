@@ -92,7 +92,7 @@ export default function WorkoutPage() {
       return;
     }
     if (s.reps == null) {
-      alert("先填一下这组做了几次(或几秒)再打勾 🙂");
+      alert("先填一下这组做了几次(或几秒)再打勾");
       return;
     }
     updateEx(i, (e) => ({
@@ -202,7 +202,7 @@ export default function WorkoutPage() {
                     <span className="font-semibold text-ink">{setsSummary(last.exercise)}</span>
                   </>
                 ) : (
-                  "第一次做这个动作,从轻的开始,先把动作做对 ✨"
+                  "第一次做这个动作,从轻的开始,先把动作做对"
                 )}
               </div>
               {ex.note && (
@@ -366,7 +366,7 @@ export default function WorkoutPage() {
             role="dialog"
             aria-label="结束训练"
           >
-            <h2 className="text-xl font-semibold">练完啦!🎉</h2>
+            <h2 className="text-xl font-semibold">练完啦</h2>
             <p className="mt-1 text-sm text-sub">
               完成 {doneSets} 组 · 用时 {Math.max(1, Math.round(elapsed / 60))} 分钟。没打勾的组不会被记录。
             </p>

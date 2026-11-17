@@ -123,7 +123,7 @@ export default function ImportExerciseModal({
       >
         <div className="mb-3 flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold">🔗 从视频 / 链接添加动作</h2>
+            <h2 className="text-lg font-semibold">从视频 / 链接添加动作</h2>
             <p className="text-xs text-sub">支持 YouTube、小红书、Facebook 分享文案或截图</p>
           </div>
           <button className="text-sm text-sub" onClick={onClose}>
@@ -186,7 +186,7 @@ export default function ImportExerciseModal({
                   className={`${btnGhost} w-full text-sm`}
                   onClick={() => fileRef.current?.click()}
                 >
-                  📷 顺便附一张视频截图（可选）
+                  顺便附一张视频截图（可选）
                 </button>
               )}
             </div>
@@ -203,7 +203,7 @@ export default function ImportExerciseModal({
               disabled={busy || (!rawInput.trim() && !note.trim() && !photo)}
               onClick={() => void parseLink()}
             >
-              {busy ? "✨ AI 正在读取并整理动作要点…" : "✨ AI 解析并生成动作卡"}
+              {busy ? "AI 正在读取并整理动作要点…" : "AI 解析并生成动作卡"}
             </button>
           </div>
         ) : (
@@ -304,7 +304,7 @@ export default function ImportExerciseModal({
                 disabled={!draft.name.trim()}
                 onClick={save}
               >
-                ✓ 保存到动作库
+                保存到动作库
               </button>
             </div>
           </div>

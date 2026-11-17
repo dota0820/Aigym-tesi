@@ -38,7 +38,7 @@ export default function ProfileSheet({ onClose }: { onClose: () => void }) {
         aria-label="切换人物与场地"
       >
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold">切换人物档案</h2>
+          <h2 className="text-base font-semibold">切换人物档案</h2>
           <button type="button" onClick={onClose} className="text-sm text-sub">
             关闭
           </button>
@@ -73,7 +73,7 @@ export default function ProfileSheet({ onClose }: { onClose: () => void }) {
                   {p.avatar || "🙂"}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1.5 font-bold">
+                  <div className="flex items-center gap-1.5 font-semibold">
                     <span className="truncate">{p.name || "默认人物"}</span>
                     {current && (
                       <span className="rounded bg-primary px-1.5 py-0.5 text-[10px] font-semibold text-white">
@@ -92,7 +92,7 @@ export default function ProfileSheet({ onClose }: { onClose: () => void }) {
 
         {gyms.length > 1 && (
           <div className="border-t border-line pt-3">
-            <div className="mb-2 text-xs font-semibold text-sub">📍 当前所在健身房</div>
+            <div className="mb-2 text-xs font-semibold text-sub">当前所在健身房</div>
             <div className="flex flex-wrap gap-1.5">
               {gyms.map((g) => {
                 const isActive = g.id === activeGym.id;
@@ -105,7 +105,7 @@ export default function ProfileSheet({ onClose }: { onClose: () => void }) {
                       switchProfileGym(g.id);
                       onClose();
                     }}
-                    className={`rounded-xl px-3 py-1.5 text-xs font-bold ${
+                    className={`rounded-xl px-3 py-1.5 text-xs font-semibold ${
                       isActive ? "bg-primary text-white" : "border border-line bg-white text-ink"
                     }`}
                   >

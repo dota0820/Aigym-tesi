@@ -31,7 +31,7 @@ function Detail() {
 
   return (
     <div className="space-y-3">
-      <button className="text-sm text-sub" onClick={() => router.back()}>
+      <button className="text-[17px] text-primary" onClick={() => router.back()}>
         ‹ 返回
       </button>
       <header>
@@ -42,11 +42,11 @@ function Detail() {
           </span>
           {custom && (
             <span className="rounded-full bg-mint-soft px-2 py-0.5 text-[11px] text-mint">
-              {e.sourcePlatform ? `🔗 ${e.sourcePlatform}` : "自定义动作"}
+              {e.sourcePlatform ? e.sourcePlatform : "自定义动作"}
             </span>
           )}
         </div>
-        <h1 className="text-2xl font-bold tracking-tight">{e.name}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">{e.name}</h1>
         <p className="text-sm text-sub">
           {e.nameEn ? `${e.nameEn} · ` : ""}新手起始 {e.startWeight}
         </p>
@@ -59,7 +59,7 @@ function Detail() {
       </Card>
 
       <Card>
-        <h2 className="mb-3 text-base font-bold">练到哪里</h2>
+        <h2 className="mb-3 text-base font-semibold">练到哪里</h2>
         <MuscleMap primary={e.primary} secondary={e.secondary} />
       </Card>
 
@@ -76,7 +76,7 @@ function Detail() {
         href={`/coach?q=${encodeURIComponent(`${e.name}${e.nameEn ? `(${e.nameEn})` : ""}我有点不确定动作对不对,能再仔细讲讲要点吗?`)}`}
         className={`${btnSoft} w-full`}
       >
-        💬 还是不懂?问教练
+        还是不懂?问教练
       </Link>
 
       {custom && (

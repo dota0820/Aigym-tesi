@@ -72,11 +72,11 @@ export default function AttachmentTip({
   const a = ATTACHMENTS[attachment.type];
   return (
     <div className="rounded-2xl border border-line bg-bg p-3">
-      <div className="text-xs font-semibold text-sub">🪝 用哪个手握(把手)</div>
+      <div className="text-xs font-semibold text-sub">用哪个手握(把手)</div>
       <div className="mt-2 flex items-center gap-3">
         <Icon type={attachment.type} />
         <div className="min-w-0">
-          <div className="text-[17px] font-bold leading-tight">{a.name}</div>
+          <div className="text-[17px] font-semibold leading-tight">{a.name}</div>
           <div className="text-xs text-sub">{a.nameEn}</div>
         </div>
       </div>

@@ -61,7 +61,7 @@ export default function ExerciseCover({
       ) : (
         <div className="flex items-center justify-between bg-primary-soft px-4 py-3 text-sm">
           <span className="font-semibold text-primary">
-            🎬 {ex.sourcePlatform ? `${ex.sourcePlatform} 导入动作` : "自定义动作"}
+            {ex.sourcePlatform ? `${ex.sourcePlatform} 导入动作` : "自定义动作"}
           </span>
           {ex.sourceUrl && (
             <a
