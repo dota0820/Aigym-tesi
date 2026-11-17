@@ -12,7 +12,7 @@ export default function PlanCard({ plan }: { plan: Plan }) {
   const router = useRouter();
   const { active, customExercises } = useApp();
   return (
-    <div className="rounded-2xl border border-line bg-card">
+    <div className="rounded-2xl bg-card">
       <div className="p-4 pb-2">
         <div className="text-xs font-semibold text-primary">训练计划 · {plan.focus}</div>
         <div className="mt-0.5 text-lg font-bold">{plan.title}</div>

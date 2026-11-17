@@ -121,7 +121,7 @@ export default function ProfileSheet({ onClose }: { onClose: () => void }) {
         {creating ? (
           <form
             onSubmit={handleCreate}
-            className="space-y-3 rounded-2xl border border-line bg-white p-3.5"
+            className="space-y-3 rounded-2xl bg-card p-3.5"
           >
             <div className="flex flex-wrap gap-1.5">
               {AVATARS.map((av) => (

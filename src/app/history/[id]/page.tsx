@@ -91,7 +91,7 @@ function Detail() {
           { l: "消耗", v: w.watch?.calories, u: "千卡" },
           { l: "平均心率", v: w.watch?.avgHr, u: "bpm" },
         ].map((x) => (
-          <div key={x.l} className="rounded-2xl border border-line bg-card py-2">
+          <div key={x.l} className="rounded-2xl bg-card py-2">
             <div className="text-lg font-bold tabular-nums">{x.v ?? "—"}</div>
             <div className="text-[11px] text-sub">
               {x.l}

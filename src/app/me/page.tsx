@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
 import ProfileSheet from "@/components/ProfileSheet";
-import { Card, H1, Row } from "@/components/ui";
+import { Chevron, H1, Icon, List, Row } from "@/components/ui";
 import { getProfileGyms, parseEquipmentList } from "@/lib/equipment";
 import { AI_MODELS } from "@/lib/models";
 import { computeNutritionTargets } from "@/lib/nutrition";
-import { useApp, useHydrated } from "@/lib/store";
+import { setLang, useApp, useHydrated } from "@/lib/store";
 
 export default function Me() {
-  const { profile, aiModel } = useApp();
+  const { profile, aiModel, lang } = useApp();
+  const isEn = lang === "en";
   const ready = useHydrated();
   const [sheetOpen, setSheetOpen] = useState(false);
 
@@ -18,7 +19,7 @@ export default function Me() {
   const gymCount = parseEquipmentList(activeGym.equipment).length;
   const targets = computeNutritionTargets(profile);
   const modelLabel =
-    AI_MODELS.find((m) => m.id === aiModel)?.label ?? (aiModel || "服务器默认");
+    AI_MODELS.find((m) => m.id === aiModel)?.label ?? (aiModel || (isEn ? "Default" : "服务器默认"));
 
   const meta = [
     profile.heightCm ? `${profile.heightCm}cm` : "",
@@ -29,51 +30,65 @@ export default function Me() {
     .join(" · ");
 
   return (
-    <div className="space-y-4">
-      <H1>我的</H1>
+    <div className="space-y-6">
+      <H1>{isEn ? "Me" : "我的"}</H1>
 
       <button
         type="button"
         onClick={() => setSheetOpen(true)}
-        className="flex w-full items-center gap-3 rounded-2xl border border-line bg-card p-4 text-left shadow-[0_1px_2px_rgba(42,39,51,0.04)] active:bg-bg"
+        className="flex w-full items-center gap-3 rounded-2xl bg-card p-4 text-left active:bg-bg"
       >
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-bg text-2xl">
+        <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-bg text-3xl">
           {profile.avatar || "🙂"}
         </span>
         <div className="min-w-0 flex-1">
-          <div className="truncate text-base font-bold">{profile.name || "默认人物"}</div>
-          <div className="truncate text-xs text-sub">
-            {meta || "点「身体与目标」填写身高、体重和目标"}
+          <div className="truncate text-[20px] font-semibold">
+            {profile.name || (isEn ? "Default" : "默认人物")}
+          </div>
+          <div className="truncate text-[13px] text-sub">
+            {meta || (isEn ? "Tap to switch profile" : "点击切换人物")}
           </div>
         </div>
-        <span className="shrink-0 text-xs font-semibold text-sub">切换 ▾</span>
+        <Chevron />
       </button>
 
-      <Card className="divide-y divide-line overflow-hidden p-0">
+      <List>
         <Row
           href="/me/profile"
-          icon="👤"
-          title="身体与目标"
+          icon={<Icon name="person" />}
+          title={isEn ? "Body & goal" : "身体与目标"}
           value={`${targets.calories} kcal`}
         />
         <Row
           href="/me/gym"
-          icon="🏋️"
-          title="我的健身房"
-          value={`${activeGym.name} · ${gymCount}项`}
+          icon={<Icon name="dumbbell" />}
+          title={isEn ? "My gym" : "我的健身房"}
+          value={`${activeGym.name} · ${gymCount}`}
         />
         <Row
           href="/me/profile#memory"
-          icon="🧠"
-          title="教练记住的事"
-          value={`${profile.memory.length} 条`}
+          icon={<Icon name="pencil" />}
+          title={isEn ? "Coach memory" : "教练记住的事"}
+          value={`${profile.memory.length}`}
         />
-      </Card>
+      </List>
 
-      <Card className="divide-y divide-line overflow-hidden p-0">
-        <Row href="/me/ai" icon="🤖" title="AI 模型" value={modelLabel} />
-        <Row href="/me/data" icon="🔐" title="口令与备份" />
-      </Card>
+      <List>
+        <button
+          type="button"
+          onClick={() => setLang(isEn ? "zh" : "en")}
+          className="flex w-full items-center gap-3 px-4 py-3 text-left active:bg-bg"
+        >
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center text-primary">
+            <Icon name="globe" />
+          </span>
+          <span className="flex-1 text-[16px]">{isEn ? "Language" : "语言"}</span>
+          <span className="text-[15px] text-sub">{isEn ? "English" : "中文"}</span>
+          <Chevron />
+        </button>
+        <Row href="/me/ai" icon={<Icon name="chat" />} title={isEn ? "AI model" : "AI 模型"} value={modelLabel} />
+        <Row href="/me/data" icon={<Icon name="gear" />} title={isEn ? "Passcode & backup" : "口令与备份"} />
+      </List>
 
       {sheetOpen && <ProfileSheet onClose={() => setSheetOpen(false)} />}
     </div>

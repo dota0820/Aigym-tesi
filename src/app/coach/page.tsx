@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import MD from "@/components/MD";
 import PlanCard from "@/components/PlanCard";
-import ProfileChip from "@/components/ProfileChip";
 import { fileToJpegDataUrl, sendToCoach, useCoachBusy, visibleText } from "@/lib/actions";
 import { setState, useApp } from "@/lib/store";
 import { canSpeak, speak, stopSpeaking, useDictation } from "@/lib/voice";
@@ -77,13 +76,10 @@ function Coach() {
   }
 
   const iconBtn =
-    "flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-2xl border border-line bg-white text-xl disabled:opacity-40";
+    "flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-2xl bg-card text-xl disabled:opacity-40";
 
   return (
     <div className="flex flex-col">
-      <div className="mb-3">
-        <ProfileChip />
-      </div>
       <header className="mb-3 flex items-center justify-between gap-2">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">AI 教练</h1>
@@ -128,7 +124,7 @@ function Coach() {
             <button
               key={s}
               onClick={() => void sendToCoach(s)}
-              className="block w-full rounded-2xl border border-line bg-card px-4 py-3 text-left text-[15px] active:scale-[0.99]"
+              className="block w-full rounded-2xl bg-card px-4 py-3 text-left text-[15px] active:scale-[0.99]"
             >
               {s}
             </button>
@@ -197,7 +193,7 @@ function Coach() {
       <div className="fixed inset-x-0 bottom-[calc(58px+env(safe-area-inset-bottom))] z-10 bg-gradient-to-t from-bg via-bg to-transparent px-4 pt-4 pb-2">
         <div className="mx-auto max-w-md">
           {(photo || photoErr || dictation.error || dictation.listening) && (
-            <div className="mb-2 flex items-center gap-3 rounded-2xl border border-line bg-card p-2 text-sm">
+            <div className="mb-2 flex items-center gap-3 rounded-2xl bg-card p-2 text-sm">
               {photo && (
                 <>
                   <img src={photo.thumb} alt="待发送的照片" className="h-14 w-14 rounded-xl object-cover" />
@@ -260,7 +256,7 @@ function Coach() {
               rows={1}
               placeholder="跟教练说点什么…"
               aria-label="给教练发消息"
-              className="max-h-32 min-h-[46px] min-w-0 flex-1 resize-none rounded-2xl border border-line bg-white px-3 py-2.5 outline-none focus:border-primary"
+              className="max-h-32 min-h-[46px] min-w-0 flex-1 resize-none rounded-2xl bg-card px-3 py-2.5 outline-none focus:border-primary"
             />
             <button
               onClick={() => submit()}

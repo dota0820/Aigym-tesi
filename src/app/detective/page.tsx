@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import DetectiveMuscleMap from "@/components/DetectiveMuscleMap";
 import MD from "@/components/MD";
-import ProfileChip from "@/components/ProfileChip";
 import { btnGhost, btnPrimary, btnSoft, Card, H1 } from "@/components/ui";
 import { visibleText } from "@/lib/actions";
 import {
@@ -282,13 +281,10 @@ function DetectiveInner() {
   }
 
   const iconBtn =
-    "flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-2xl border border-line bg-white text-xl disabled:opacity-40";
+    "flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-2xl bg-card text-xl disabled:opacity-40";
 
   return (
     <div className="flex flex-col">
-      <div className="mb-3">
-        <ProfileChip />
-      </div>
 
       <header className="mb-3 flex items-start justify-between gap-2">
         <H1
@@ -339,7 +335,7 @@ function DetectiveInner() {
       </header>
 
       {/* Sub-navigation */}
-      <div className="mb-4 grid grid-cols-3 gap-1.5 rounded-2xl border border-line bg-card p-1">
+      <div className="mb-4 grid grid-cols-3 gap-1.5 rounded-2xl bg-card p-1">
         {(
           [
             { id: "investigate", icon: "🔍", zh: "互动问诊", en: "Investigate" },
@@ -592,7 +588,7 @@ function DetectiveInner() {
                       setBuilderOpen(false);
                       void sendToDetective(msg, { lang, mode: "investigate" });
                     }}
-                    className="block w-full rounded-2xl border border-line bg-card px-4 py-3 text-left text-sm active:scale-[0.99]"
+                    className="block w-full rounded-2xl bg-card px-4 py-3 text-left text-sm active:scale-[0.99]"
                   >
                     “{msg}”
                   </button>
@@ -678,7 +674,7 @@ function DetectiveInner() {
                 processingMedia ||
                 dictation.error ||
                 dictation.listening) && (
-                <div className="mb-2 flex items-center gap-3 rounded-2xl border border-line bg-card p-2 text-xs">
+                <div className="mb-2 flex items-center gap-3 rounded-2xl bg-card p-2 text-xs">
                   {media && (
                     <>
                       <img
@@ -775,7 +771,7 @@ function DetectiveInner() {
                       ? "Describe what you feel or which exercise…"
                       : "描述动作和哪里酸痛/没感觉…"
                   }
-                  className="max-h-32 min-h-[46px] min-w-0 flex-1 resize-none rounded-2xl border border-line bg-white px-3 py-2.5 outline-none focus:border-primary"
+                  className="max-h-32 min-h-[46px] min-w-0 flex-1 resize-none rounded-2xl bg-card px-3 py-2.5 outline-none focus:border-primary"
                 />
                 <button
                   type="button"

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import ProfileChip from "@/components/ProfileChip";
 import { btnSoft, Card, H1 } from "@/components/ui";
 import { startFree } from "@/lib/actions";
 import {
@@ -51,7 +50,6 @@ function HistoryContent() {
 
   return (
     <div className="space-y-4">
-      <ProfileChip />
 
       <H1
         sub={`${profile.avatar || "🧑"} ${profile.name || "当前人物"} · ${workouts.length} 次训练 · ${meals.length} 条饮食`}
@@ -63,7 +61,7 @@ function HistoryContent() {
       <div
         role="tablist"
         aria-label="记录类型"
-        className="grid grid-cols-2 gap-1.5 rounded-2xl border border-line bg-white p-1"
+        className="grid grid-cols-2 gap-1.5 rounded-2xl bg-card p-1"
       >
         <button
           type="button"
@@ -195,7 +193,7 @@ function HistoryContent() {
                 const over = dayTotals.calories > targets.calories * 1.05;
                 return (
                   <section key={dateKey} className="space-y-2">
-                    <div className="rounded-2xl border border-line bg-white px-3.5 py-2.5">
+                    <div className="rounded-2xl bg-card px-3.5 py-2.5">
                       <div className="flex items-baseline justify-between gap-2">
                         <div className="flex items-baseline gap-2">
                           <span className="text-sm font-bold">{fmtDateKey(dateKey)}</span>

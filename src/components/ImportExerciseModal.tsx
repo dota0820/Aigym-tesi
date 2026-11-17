@@ -169,7 +169,7 @@ export default function ImportExerciseModal({
                 }}
               />
               {photo ? (
-                <div className="flex items-center gap-3 rounded-2xl border border-line bg-card p-2">
+                <div className="flex items-center gap-3 rounded-2xl bg-card p-2">
                   <img src={photo.thumb} alt="动作截图" className="h-16 w-24 rounded-xl object-cover" />
                   <div className="flex-1 text-xs text-sub">已附带参考截图，保存后也会作为动作封面图</div>
                   <button
@@ -277,7 +277,7 @@ export default function ImportExerciseModal({
               </label>
             </div>
 
-            <div className="rounded-2xl border border-line bg-card p-3 text-sm">
+            <div className="rounded-2xl bg-card p-3 text-sm">
               <div className="font-semibold">记住这 3 点：</div>
               <ul className="mt-1 space-y-1 text-ink/85">
                 {draft.cues.map((c, i) => (

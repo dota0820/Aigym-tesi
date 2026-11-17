@@ -87,7 +87,7 @@ function Library() {
       )}
 
       {g === "custom" && list.length === 0 && (
-        <div className="rounded-2xl border border-line bg-card p-5 text-center">
+        <div className="rounded-2xl bg-card p-5 text-center">
           <div className="text-2xl">🎬</div>
           <p className="mt-2 text-sm font-semibold">还没有导入过外部视频动作</p>
           <p className="mt-1 text-xs leading-relaxed text-sub">
@@ -105,7 +105,7 @@ function Library() {
             <li key={e.id}>
               <Link
                 href={`/library/${e.id}`}
-                className="flex items-center gap-3 rounded-2xl border border-line bg-card p-2 pr-3 active:scale-[0.99]"
+                className="flex items-center gap-3 rounded-2xl bg-card p-2 pr-3 active:scale-[0.99]"
               >
                 {thumb ? (
                   <img

@@ -497,7 +497,7 @@ export default function GymWizardModal({
                     return (
                       <div
                         key={item}
-                        className="space-y-2 rounded-2xl border border-line bg-white p-3"
+                        className="space-y-2 rounded-2xl bg-card p-3"
                       >
                         <div className="flex items-center justify-between gap-2">
                           <span className="text-sm font-bold">
@@ -565,7 +565,7 @@ export default function GymWizardModal({
 
           {currentStep.id === "confirm" && (
             <div className="space-y-4">
-              <div className="space-y-2 rounded-2xl border border-line bg-white p-3.5">
+              <div className="space-y-2 rounded-2xl bg-card p-3.5">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-sub">
                     已选器械（{selected.length} 项，点一下移除）
@@ -622,7 +622,7 @@ export default function GymWizardModal({
                 </div>
               </div>
 
-              <label className="block rounded-2xl border border-line bg-white p-3.5">
+              <label className="block rounded-2xl bg-card p-3.5">
                 <span className="text-xs font-bold text-sub">补充说明（可选）</span>
                 <textarea
                   className={`${input} mt-1.5 text-xs`}

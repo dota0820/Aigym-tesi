@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
-import ProfileChip from "@/components/ProfileChip";
 import { fileToJpegDataUrl } from "@/lib/actions";
 import {
   computeNutritionTargets,
@@ -255,7 +254,6 @@ function FoodContent() {
 
   return (
     <div className="space-y-4">
-      <ProfileChip />
       <div className="flex items-start justify-between gap-2">
         <H1 sub="拍照片或说一句话，AI 营养师帮你算热量、蛋白质、碳水和脂肪">饮食营养</H1>
         <div className="flex shrink-0 items-center gap-1 rounded-full border border-line bg-card p-1 text-xs font-semibold">
