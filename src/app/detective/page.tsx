@@ -568,7 +568,7 @@ function DetectiveInner() {
             <div className="space-y-2">
               <div className="px-1 text-xs font-semibold text-sub">
                 {isEn
-                  ? "Or tap a common beginner mystery to try:"
+                  ? "Common questions"
                   : "常见问题"}
               </div>
               {STARTERS.map((s) => {
