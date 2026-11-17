@@ -1,6 +1,5 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { fileToJpegDataUrl } from "@/lib/actions";
@@ -25,7 +24,7 @@ import {
 } from "@/lib/store";
 import { MEAL_TYPES, type MealItem, type MealLog, type MealType } from "@/lib/types";
 import { useDictation } from "@/lib/voice";
-import { btnGhost, btnPrimary, btnSoft, Card, H1, input } from "@/components/ui";
+import { btnGhost, btnPrimary, Card, H1, input } from "@/components/ui";
 
 interface MealDraft {
   mealType: MealType;
@@ -250,7 +249,6 @@ function FoodContent() {
     }));
   }
 
-  const askCoachPrompt = `我现在已摄入 ${totals.calories} 千卡（蛋白质 ${totals.protein}g、碳水 ${totals.carbs}g、脂肪 ${totals.fat}g），目标是 ${targets.calories} 千卡、蛋白质 ${targets.protein}g。请根据我今天的状态建议下一餐吃什么好？`;
 
   return (
     <div className="space-y-4">
@@ -363,9 +361,6 @@ function FoodContent() {
           </div>
         )}
 
-        <Link href={`/coach?q=${encodeURIComponent(askCoachPrompt)}`} className={`${btnSoft} w-full text-sm`}>
-          问营养师 / 教练：下一餐怎么吃更好？
-        </Link>
       </Card>
 
       <Card className="space-y-3">
@@ -474,7 +469,7 @@ function FoodContent() {
               disabled={busy || (!text.trim() && !photo)}
               onClick={() => void analyzeMeal()}
             >
-              {busy ? "AI 营养师正在识别食物并计算…" : "AI 分析蛋白质 / 碳水 / 热量"}
+              {busy ? "分析中…" : "分析营养"}
             </button>
           </>
         ) : (

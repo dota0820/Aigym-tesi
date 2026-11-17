@@ -76,7 +76,7 @@ function DetectiveInner() {
       : "investigate",
   );
   const [builderOpen, setBuilderOpen] = useState(
-    () => !initialQParam && (!!initialExParam || detectiveChat.length === 0),
+    () => !initialQParam && !!initialExParam,
   );
 
   // Symptom builder state
@@ -363,23 +363,16 @@ function DetectiveInner() {
       {tab === "investigate" && (
         <div className="space-y-4 pb-36">
           {/* Quick Symptom Builder */}
-          <Card className="border-primary/20">
+          <Card>
             <button
               type="button"
               onClick={() => setBuilderOpen((v) => !v)}
               className="flex w-full items-center justify-between text-left"
             >
-              <div>
-                <div className="text-sm font-semibold text-ink">
-                  {isEn ? "Symptom & Muscle Check-In" : "快速描述问题（不用懂术语）"}
-                </div>
-                <div className="text-xs text-sub">
-                  {isEn
-                    ? "Pick the exercise, where you feel it, and sensation type"
-                    : "选动作 + 点哪里不舒服 + 什么感觉，再开始一对一排查"}
-                </div>
-              </div>
-              <span className="text-sm text-sub">{builderOpen ? "▴" : "▾"}</span>
+              <span className="text-[16px]">
+                {isEn ? "Describe your problem" : "描述你的问题"}
+              </span>
+              <span className="text-sm text-sub">{builderOpen ? (isEn ? "Hide" : "收起") : isEn ? "Show" : "展开"}</span>
             </button>
 
             {builderOpen && (
@@ -576,7 +569,7 @@ function DetectiveInner() {
               <div className="px-1 text-xs font-semibold text-sub">
                 {isEn
                   ? "Or tap a common beginner mystery to try:"
-                  : "也可以直接点下面常见的新手发力困惑："}
+                  : "常见问题"}
               </div>
               {STARTERS.map((s) => {
                 const msg = isEn ? s.en : s.zh;
