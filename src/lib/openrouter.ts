@@ -85,8 +85,11 @@ async function streamTurn(
   send: (ev: unknown) => void,
   model = OPENROUTER_MODEL,
   apiKey?: string,
+  useTools = true,
 ): Promise<{ text: string; calls: ToolCall[] }> {
-  const res = await post({ messages, tools, stream: true, max_tokens: 8000 }, model, apiKey);
+  const payload: Record<string, unknown> = { messages, stream: true, max_tokens: 8000 };
+  if (useTools) payload.tools = tools;
+  const res = await post(payload, model, apiKey);
   const reader = res.body!.getReader();
   const dec = new TextDecoder();
   let buf = "";
@@ -153,9 +156,11 @@ export async function runOpenRouterChat(opts: {
   image?: string;
   model?: string;
   apiKey?: string;
+  useTools?: boolean;
   send: (ev: unknown) => void;
 }) {
   const { send } = opts;
+  const useTools = opts.useTools ?? true;
   const model = opts.model || OPENROUTER_MODEL;
   const messages: Msg[] = [
     systemMessage(opts.system, opts.context, model),
@@ -173,8 +178,8 @@ export async function runOpenRouterChat(opts: {
   ];
 
   for (let iter = 0; iter < 6; iter++) {
-    const { text, calls } = await streamTurn(messages, send, model, opts.apiKey);
-    if (!calls.length) return;
+    const { text, calls } = await streamTurn(messages, send, model, opts.apiKey, useTools);
+    if (!calls.length || !useTools) return;
     messages.push({ role: "assistant", content: text || null, tool_calls: calls });
     for (const call of calls) {
       const tool = COACH_TOOLS.find((t) => t.name === call.function.name);

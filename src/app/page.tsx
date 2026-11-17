@@ -6,12 +6,14 @@ import PlanCard from "@/components/PlanCard";
 import ProfileChip from "@/components/ProfileChip";
 import { btnGhost, btnPrimary, Card, H1 } from "@/components/ui";
 import { startFree } from "@/lib/actions";
+import { GROUP_LABEL_EN } from "@/lib/i18n";
 import { computeNutritionTargets, localDateKey, mealsForDate, sumMealMacros } from "@/lib/nutrition";
 import { durationMin, fmtDate, useApp, useHydrated } from "@/lib/store";
 import { GROUPS } from "@/lib/types";
 
 export default function Home() {
-  const { profile, plan, active, workouts, meals } = useApp();
+  const { profile, plan, active, workouts, meals, lang } = useApp();
+  const isEn = lang === "en";
   const ready = useHydrated();
   const router = useRouter();
   const sorted = [...workouts].sort((a, b) => b.startedAt.localeCompare(a.startedAt));
@@ -20,7 +22,17 @@ export default function Home() {
   const weekAgo = new Date(now.getTime() - 7 * 864e5).toISOString();
   const thisWeek = workouts.filter((w) => w.startedAt >= weekAgo).length;
   const hour = now.getHours();
-  const hello = hour < 11 ? "早上好" : hour < 18 ? "下午好" : "晚上好";
+  const hello = isEn
+    ? hour < 12
+      ? "Good morning"
+      : hour < 18
+        ? "Good afternoon"
+        : "Good evening"
+    : hour < 11
+      ? "早上好"
+      : hour < 18
+        ? "下午好"
+        : "晚上好";
 
   const todayMeals = mealsForDate(meals, localDateKey(now));
   const todayMacros = sumMealMacros(todayMeals);
@@ -31,10 +43,41 @@ export default function Home() {
   return (
     <div className="space-y-4">
       <ProfileChip />
-      <H1 sub={`最近 7 天练了 ${thisWeek} 次 · 一共 ${workouts.length} 次`}>
+      <H1
+        sub={
+          isEn
+            ? `${thisWeek} workouts in the last 7 days · ${workouts.length} total`
+            : `最近 7 天练了 ${thisWeek} 次 · 一共 ${workouts.length} 次`
+        }
+      >
         {hello}
-        {profile.name ? `,${profile.name}` : ""} 👋
+        {profile.name ? `, ${profile.name}` : ""} 👋
       </H1>
+
+      <Link href="/detective" className="block">
+        <Card className="border-primary/35 bg-gradient-to-br from-primary-soft via-card to-mint-soft/40">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <div className="text-xs font-bold text-primary">
+                🕵️ {isEn ? "NEW · AI MOVEMENT DETECTIVE" : "新模块 · AI 动作侦探"}
+              </div>
+              <div className="mt-0.5 text-base font-bold text-ink">
+                {isEn
+                  ? "Feeling the wrong muscle? Let's investigate"
+                  : "练错了地方？脖子腰酸、找不到发力？"}
+              </div>
+              <p className="mt-1 text-xs leading-relaxed text-sub">
+                {isEn
+                  ? "1-question-at-a-time biomechanics check, compensation fixes & video form review."
+                  : "单步问诊查代偿 · 日常部位翻译 · 32动作库 · 上传视频/照片分析"}
+              </p>
+            </div>
+            <span className="shrink-0 rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-white">
+              {isEn ? "Diagnose ›" : "去排查 ›"}
+            </span>
+          </div>
+        </Card>
+      </Link>
 
       {!profile.goal && (
         <Link href="/me" className="block">
@@ -58,24 +101,34 @@ export default function Home() {
       )}
 
       <section>
-        <h2 className="mb-2 text-sm font-semibold text-sub">今天想练什么?让教练安排</h2>
+        <h2 className="mb-2 text-sm font-semibold text-sub">
+          {isEn ? "What do you want to train today?" : "今天想练什么?让教练安排"}
+        </h2>
         <div className="grid grid-cols-4 gap-2">
           {GROUPS.map((g) => (
             <Link
               key={g.id}
-              href={`/coach?q=${encodeURIComponent(`今天想练${g.label},帮我安排一下`)}`}
+              href={`/coach?q=${encodeURIComponent(
+                isEn
+                  ? `I want to train ${GROUP_LABEL_EN[g.id]} today, please build my plan.`
+                  : `今天想练${g.label},帮我安排一下`,
+              )}`}
               className="flex flex-col items-center gap-1 rounded-2xl border border-line bg-card py-3 text-sm font-semibold active:scale-95"
             >
               <span className="text-2xl">{g.emoji}</span>
-              {g.label}
+              {isEn ? GROUP_LABEL_EN[g.id] : g.label}
             </Link>
           ))}
         </div>
         <Link
-          href={`/coach?q=${encodeURIComponent("我不知道今天该练什么,你根据我的记录帮我决定吧")}`}
+          href={`/coach?q=${encodeURIComponent(
+            isEn
+              ? "I don't know what to train today, please decide based on my history."
+              : "我不知道今天该练什么,你根据我的记录帮我决定吧",
+          )}`}
           className={`${btnGhost} mt-2 w-full`}
         >
-          🤔 不知道练什么,教练帮我决定
+          🤔 {isEn ? "Not sure what to train — let coach decide" : "不知道练什么,教练帮我决定"}
         </Link>
       </section>
 

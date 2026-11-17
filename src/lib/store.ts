@@ -5,6 +5,7 @@ import type {
   AppState,
   CustomExercise,
   GymEnvironment,
+  Lang,
   MealLog,
   PersonWorkspace,
   Profile,
@@ -58,6 +59,7 @@ export function emptyWorkspace(id = "default", patch: Partial<Profile> = {}): Pe
     active: null,
     workouts: [],
     chat: [],
+    detectiveChat: [],
     meals: [],
   };
 }
@@ -69,6 +71,7 @@ interface RootStore {
   passcode: string;
   aiModel: string;
   openRouterKey: string;
+  lang: Lang;
 }
 
 const DEFAULT_ROOT: RootStore = {
@@ -78,6 +81,7 @@ const DEFAULT_ROOT: RootStore = {
   passcode: "",
   aiModel: "",
   openRouterKey: "",
+  lang: "zh",
 };
 
 function project(root: RootStore): AppState {
@@ -91,10 +95,12 @@ function project(root: RootStore): AppState {
     active: activeWs.active,
     workouts: activeWs.workouts,
     chat: activeWs.chat,
+    detectiveChat: activeWs.detectiveChat ?? [],
     customExercises: root.customExercises,
     meals: activeWs.meals,
     aiModel: root.aiModel,
     openRouterKey: root.openRouterKey,
+    lang: root.lang ?? "zh",
   };
 }
 
@@ -128,12 +134,15 @@ function normalizeWorkspace(raw: any, fallbackId: string, sharedPasscode: string
     active: raw?.active ?? null,
     workouts: Array.isArray(raw?.workouts) ? raw.workouts : [],
     chat: Array.isArray(raw?.chat) ? raw.chat : [],
+    detectiveChat: Array.isArray(raw?.detectiveChat) ? raw.detectiveChat : [],
     meals: Array.isArray(raw?.meals) ? raw.meals : [],
   };
 }
 
 function parseRootData(p: any): RootStore | null {
   if (!p || typeof p !== "object") return null;
+
+  const lang: Lang = p.lang === "en" ? "en" : "zh";
 
   // Multi-profile format
   if (Array.isArray(p.profiles) && p.profiles.length > 0) {
@@ -151,6 +160,7 @@ function parseRootData(p: any): RootStore | null {
       passcode,
       aiModel: typeof p.aiModel === "string" ? p.aiModel : "",
       openRouterKey: typeof p.openRouterKey === "string" ? p.openRouterKey : "",
+      lang,
     };
   }
 
@@ -165,6 +175,7 @@ function parseRootData(p: any): RootStore | null {
       passcode,
       aiModel: typeof p.aiModel === "string" ? p.aiModel : "",
       openRouterKey: typeof p.openRouterKey === "string" ? p.openRouterKey : "",
+      lang,
     };
   }
 
@@ -224,6 +235,7 @@ export function setState(fn: (s: AppState) => AppState) {
       active: next.active,
       workouts: next.workouts,
       chat: next.chat,
+      detectiveChat: next.detectiveChat,
       meals: next.meals,
     };
   });
@@ -235,7 +247,13 @@ export function setState(fn: (s: AppState) => AppState) {
     passcode,
     aiModel: next.aiModel,
     openRouterKey: next.openRouterKey,
+    lang: next.lang,
   });
+}
+
+export function setLang(lang: Lang) {
+  load();
+  commit({ ...rootState, lang });
 }
 
 export function setAiModel(id: string) {
@@ -256,6 +274,7 @@ export function aiHeaders(): Record<string, string> {
   return {
     "Content-Type": "application/json",
     "x-app-passcode": pass,
+    "x-app-lang": s.lang,
     ...(s.aiModel ? { "x-ai-model": s.aiModel } : {}),
     ...(orKey ? { "x-openrouter-key": orKey } : {}),
   };

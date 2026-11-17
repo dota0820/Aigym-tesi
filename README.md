@@ -4,6 +4,7 @@
 
 ## 功能
 
+- **AI 动作侦探 (Movement Detective)** — 新手专属生物力学排查与动作矫正引擎：一次只问 1 个关键问题锁定代偿原因、12 种日常身体部位描述翻译为可能肌群、置信度分级分析、左右不对称评估、支持上传照片或视频（自动抽取 4 帧连续动作序列）视觉评估、7 级安全/疼痛警示，以及 32 个核心动作的发力教育库；全局支持中文 / English 一键切换。
 - **今天** — 点一个部位(背/胸/腿/臀…),教练根据你的资料和历史记录排好动作、组数、重量。
 - **AI 教练** — 随时聊天:问动作、聊下次练什么、口述训练/饮食让它帮你记录;它会记住伤病和偏好。
 - **训练中** — 每个动作默认展示大尺寸示范动图(点击可暂停对比起始/终点)、详细做法(器械怎么调、坐哪里、拉到哪里、哪里该酸)、上次表现和组间休息倒计时。
@@ -36,6 +37,9 @@ npm run dev                  # http://localhost:3000
 - `src/lib/nutrition.ts` — 每日营养目标与餐食计算
 - `src/lib/link-extract.ts` — 视频/网页链接元数据抓取
 - `src/lib/coach-prompt.ts` — 教练的系统提示词
+- `src/lib/movement-detective.ts` — AI 动作侦探系统提示词、日常部位映射、疼痛安全分级与 32 动作生物力学库
+- `src/app/detective/page.tsx` — AI 动作侦探页面（互动问诊 / 视觉分析 / 部位与 32 动作百科）
+- `src/app/api/detective/route.ts` — AI 动作侦探流式诊断接口
 - `src/app/api/chat/route.ts` — AI 教练(工具:保存计划 / 记录训练 / 记录饮食 / 记住信息)
 - `src/app/api/nutrition/route.ts` — AI 食物营养分析
 - `src/app/api/equipment/route.ts` — AI 拍照识别器械

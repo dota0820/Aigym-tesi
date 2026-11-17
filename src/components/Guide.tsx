@@ -113,20 +113,30 @@ export default function Guide({
 
       {lib && wrongFeel(lib).length > 0 && (
         <div>
-          <Label>感觉不对?点一下问教练</Label>
+          <Label>感觉不对?点一下问动作侦探 / 教练</Label>
           <div className="mt-2 space-y-2">
             {wrongFeel(lib).map((w) => (
               <Link
                 key={w}
-                href={`/coach?q=${encodeURIComponent(`我做${lib.name}(${lib.nameEn || lib.name})的时候,${w}。是哪里做错了?怎么改?`)}`}
+                href={`/detective?exercise=${encodeURIComponent(lib.id)}&q=${encodeURIComponent(`我做${lib.name}(${lib.nameEn || lib.name})的时候,${w}。请用动作侦探流程帮我排查原因并调整。`)}`}
                 className="flex items-center justify-between gap-2 rounded-2xl border border-primary/40 bg-white px-3 py-3 text-[16px] font-semibold text-primary active:scale-[0.99]"
               >
-                <span>{w}?</span>
-                <span className="shrink-0 text-sm">问教练 ›</span>
+                <span>🕵️ {w}?</span>
+                <span className="shrink-0 text-sm">侦探排查 ›</span>
               </Link>
             ))}
           </div>
         </div>
+      )}
+
+      {lib && (
+        <Link
+          href={`/detective?exercise=${encodeURIComponent(lib.id)}`}
+          className="flex items-center justify-between gap-2 rounded-2xl border border-mint/40 bg-mint-soft/50 px-3 py-3 text-[15px] font-semibold text-mint active:scale-[0.99]"
+        >
+          <span>🧬 打开「AI 动作侦探」排查发力或上传视频</span>
+          <span className="shrink-0 text-sm">进入 ›</span>
+        </Link>
       )}
 
       <div className="flex flex-wrap gap-4">

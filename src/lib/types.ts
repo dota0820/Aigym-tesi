@@ -279,6 +279,8 @@ export interface Profile {
   nutritionTarget?: NutritionTargets;
 }
 
+export type Lang = "zh" | "en";
+
 export interface ChatMsg {
   id: string;
   role: "user" | "assistant";
@@ -298,6 +300,7 @@ export interface PersonWorkspace {
   active: Workout | null;
   workouts: Workout[];
   chat: ChatMsg[];
+  detectiveChat: ChatMsg[];
   meals: MealLog[];
 }
 
@@ -309,8 +312,10 @@ export interface AppState {
   active: Workout | null;
   workouts: Workout[];
   chat: ChatMsg[];
+  detectiveChat: ChatMsg[];
   customExercises: CustomExercise[];
   meals: MealLog[];
   aiModel: string;
   openRouterKey: string;
+  lang: Lang;
 }
