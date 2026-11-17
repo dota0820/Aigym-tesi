@@ -255,8 +255,8 @@ function FoodContent() {
   return (
     <div className="space-y-4">
       <div className="flex items-start justify-between gap-2">
-        <H1 sub="拍照片或说一句话，AI 营养师帮你算热量、蛋白质、碳水和脂肪">饮食营养</H1>
-        <div className="flex shrink-0 items-center gap-1 rounded-full border border-line bg-card p-1 text-xs font-semibold">
+        <H1>饮食</H1>
+        <div className="flex shrink-0 items-center gap-1 rounded-full bg-card p-1 text-xs font-semibold">
           <button
             type="button"
             className="px-2 py-1 text-sub"
@@ -282,14 +282,9 @@ function FoodContent() {
         <div className="flex items-center justify-between">
           <div>
             <div className="text-xs font-semibold text-sub">
-              {fmtDateKey(dateKey)}营养进度{" "}
-              {targets.isCustom
-                ? "(自定义目标)"
-                : targets.missingBodyStats
-                  ? "(默认参考 · 填身高体重更准)"
-                  : `(${profile.heightCm}cm/${profile.weightKg}kg · BMR ${targets.bmr})`}
+              热量
             </div>
-            <div className="mt-0.5 text-2xl font-bold tabular-nums">
+            <div className="mt-0.5 text-2xl font-semibold tabular-nums">
               {totals.calories}
               <span className="text-sm font-normal text-sub"> / {targets.calories} kcal</span>
             </div>
@@ -299,7 +294,7 @@ function FoodContent() {
             className="rounded-full bg-bg px-3 py-1 text-xs font-semibold text-sub"
             onClick={() => setEditTargets(!editTargets)}
           >
-            {editTargets ? "收起目标" : "⚙️ 调目标"}
+            {editTargets ? "收起目标" : "调目标"}
           </button>
         </div>
 
@@ -313,9 +308,9 @@ function FoodContent() {
         </div>
 
         <div className="space-y-2.5 pt-1">
-          <MacroBar label="🥩 蛋白质" val={totals.protein} target={targets.protein} unit="g" barColor="bg-mint" />
-          <MacroBar label="🍚 碳水" val={totals.carbs} target={targets.carbs} unit="g" barColor="bg-amber-500" />
-          <MacroBar label="🥑 脂肪" val={totals.fat} target={targets.fat} unit="g" barColor="bg-primary/80" />
+          <MacroBar label="蛋白质" val={totals.protein} target={targets.protein} unit="g" barColor="bg-mint" />
+          <MacroBar label="碳水" val={totals.carbs} target={targets.carbs} unit="g" barColor="bg-amber-500" />
+          <MacroBar label="脂肪" val={totals.fat} target={targets.fat} unit="g" barColor="bg-primary/80" />
         </div>
 
         {editTargets && (
@@ -363,19 +358,19 @@ function FoodContent() {
 
         {dayWorkouts.length > 0 && (
           <div className="rounded-xl bg-mint-soft px-3 py-2 text-xs text-mint">
-            🏋️ {fmtDateKey(dateKey)}练了：{dayWorkouts.map((w) => w.title).join("、")}
+            {fmtDateKey(dateKey)}练了：{dayWorkouts.map((w) => w.title).join("、")}
             {workoutCals > 0 ? ` · 手表消耗 ${workoutCals} kcal` : ""}
           </div>
         )}
 
         <Link href={`/coach?q=${encodeURIComponent(askCoachPrompt)}`} className={`${btnSoft} w-full text-sm`}>
-          💬 问营养师 / 教练：下一餐怎么吃更好？
+          问营养师 / 教练：下一餐怎么吃更好？
         </Link>
       </Card>
 
       <Card className="space-y-3">
         <div className="flex items-center justify-between">
-          <div className="text-sm font-bold">📸 记一餐</div>
+          <div className="text-sm font-semibold">记一餐</div>
           {!draft && (
             <button
               type="button"
@@ -402,7 +397,7 @@ function FoodContent() {
                   : "border border-line bg-bg text-ink"
               }`}
             >
-              {t.emoji} {t.label}
+              {t.label}
             </button>
           ))}
         </div>
@@ -454,7 +449,7 @@ function FoodContent() {
                 disabled={busy}
                 onClick={() => fileRef.current?.click()}
               >
-                📷 {photo ? "换一张图" : "拍食物 / 传图"}
+                {photo ? "换一张图" : "拍食物 / 传图"}
               </button>
               {dictation.supported && (
                 <button
@@ -463,7 +458,7 @@ function FoodContent() {
                   disabled={busy}
                   onClick={() => (dictation.listening ? dictation.stop() : dictation.start())}
                 >
-                  {dictation.listening ? "■ 停止" : "🎙 语音"}
+                  {dictation.listening ? "■ 停止" : "语音"}
                 </button>
               )}
             </div>
@@ -479,14 +474,14 @@ function FoodContent() {
               disabled={busy || (!text.trim() && !photo)}
               onClick={() => void analyzeMeal()}
             >
-              {busy ? "✨ AI 营养师正在识别食物并计算…" : "✨ AI 分析蛋白质 / 碳水 / 热量"}
+              {busy ? "AI 营养师正在识别食物并计算…" : "AI 分析蛋白质 / 碳水 / 热量"}
             </button>
           </>
         ) : (
           <div className="space-y-3 border-t border-line pt-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-primary">
-                {manualMode ? "✍️ 手动填写（直接修改数字）" : "✨ AI 分析结果（可核对微调后保存）"}
+                {manualMode ? "手动填写（直接修改数字）" : "AI 分析结果（可核对微调后保存）"}
               </span>
               <button
                 type="button"
@@ -502,7 +497,7 @@ function FoodContent() {
 
             {draft.advice && (
               <div className="rounded-xl bg-mint-soft px-3 py-2 text-xs leading-relaxed text-mint">
-                🥗 {draft.advice}
+                {draft.advice}
               </div>
             )}
 
@@ -583,7 +578,7 @@ function FoodContent() {
             )}
 
             <button type="button" className={`${btnPrimary} w-full`} onClick={saveDraft}>
-              ✓ 保存到{fmtDateKey(dateKey)}饮食记录
+              保存到{fmtDateKey(dateKey)}饮食记录
             </button>
           </div>
         )}
@@ -619,7 +614,7 @@ function FoodContent() {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
                       <span className="rounded-full bg-primary-soft px-2 py-0.5 text-[11px] font-semibold text-primary">
-                        {mt.emoji} {mt.label} · {time}
+                        {mt.label} · {time}
                       </span>
                       <button
                         type="button"
@@ -633,7 +628,7 @@ function FoodContent() {
                         删除
                       </button>
                     </div>
-                    <div className="mt-1 font-bold">{m.summary}</div>
+                    <div className="mt-1 font-semibold">{m.summary}</div>
                     <div className="mt-1 flex flex-wrap gap-x-2.5 gap-y-0.5 text-xs text-sub tabular-nums">
                       <span className="font-semibold text-ink">{m.calories} kcal</span>
                       <span>蛋白 {m.protein}g</span>
@@ -645,7 +640,7 @@ function FoodContent() {
 
                 {m.advice && (
                   <p className="rounded-xl bg-mint-soft px-3 py-2 text-xs leading-relaxed text-mint">
-                    🥗 {m.advice}
+                    {m.advice}
                   </p>
                 )}
 

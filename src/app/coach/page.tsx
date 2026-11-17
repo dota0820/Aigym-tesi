@@ -82,8 +82,7 @@ function Coach() {
     <div className="flex flex-col">
       <header className="mb-3 flex items-center justify-between gap-2">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">AI 教练</h1>
-          <p className="text-sm text-sub">打字、说话、拍照都可以</p>
+          <h1 className="text-[32px] leading-tight font-bold tracking-tight">教练</h1>
         </div>
         <div className="flex shrink-0 items-center gap-3">
           {canSpeak() && (
@@ -98,7 +97,7 @@ function Coach() {
                 profile.speak ? "bg-primary text-white" : "border border-line bg-card text-sub"
               }`}
             >
-              {profile.speak ? "🔊 朗读开" : "🔈 朗读关"}
+              {profile.speak ? "朗读开" : "朗读关"}
             </button>
           )}
           {chat.length > 0 && (
@@ -118,7 +117,7 @@ function Coach() {
       {chat.length === 0 && (
         <div className="space-y-2">
           <p className="rounded-2xl bg-card p-4 text-[15px] leading-relaxed">
-            嗨,我是你的健身教练 💪 告诉我今天想练哪里,我会看你之前的记录,帮你排好动作、组数和重量。看到不会用的器械,拍张照发给我就行。
+            嗨,我是你的健身教练 告诉我今天想练哪里,我会看你之前的记录,帮你排好动作、组数和重量。看到不会用的器械,拍张照发给我就行。
           </p>
           {STARTERS.map((s) => (
             <button
@@ -142,7 +141,7 @@ function Coach() {
               {m.image ? (
                 <img src={m.image} alt="你发的照片" className="max-h-48 max-w-[60%] rounded-2xl" />
               ) : m.image === "" ? (
-                <span className="text-xs text-sub">📷 照片(已不保留预览)</span>
+                <span className="text-xs text-sub">照片(已不保留预览)</span>
               ) : null}
               <div className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-md bg-primary px-4 py-2.5 text-[15px] text-white">
                 {m.text}
@@ -162,12 +161,12 @@ function Coach() {
               {m.plan && <PlanCard plan={m.plan} />}
               {m.logged && (
                 <div className="inline-block rounded-full bg-mint-soft px-3 py-1 text-xs font-semibold text-mint">
-                  ✓ 已记录:{m.logged}
+                  已记录:{m.logged}
                 </div>
               )}
               {m.mealLogged && (
                 <div className="inline-block rounded-full bg-mint-soft px-3 py-1 text-xs font-semibold text-mint">
-                  🥗 已记录饮食:{m.mealLogged}
+                  已记录饮食:{m.mealLogged}
                 </div>
               )}
               {isLast && !busy && m.choices && m.choices.length > 0 && (
@@ -205,7 +204,7 @@ function Coach() {
               )}
               {!photo && dictation.listening && (
                 <span className="flex-1 animate-pulse px-2 font-semibold text-primary">
-                  🎙 正在听…说完会自动停
+                  正在听…说完会自动停
                 </span>
               )}
               {!photo && !dictation.listening && (photoErr || dictation.error) && (

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import PlanCard from "@/components/PlanCard";
 import ProfileChip from "@/components/ProfileChip";
-import { btnPrimary, Card, H1, Icon, List, Row, SectionTitle } from "@/components/ui";
+import { btnPrimary, Card, H1, List, Row, SectionTitle } from "@/components/ui";
 import { startFree } from "@/lib/actions";
 import { GROUP_LABEL_EN } from "@/lib/i18n";
 import { computeNutritionTargets, localDateKey, mealsForDate, sumMealMacros } from "@/lib/nutrition";
@@ -65,28 +65,21 @@ export default function Home() {
           <PlanCard plan={plan} />
         </section>
       ) : (
-        <Card className="p-5">
-          <div className="text-[20px] font-semibold">{isEn ? "Ready to train?" : "准备好训练了吗？"}</div>
-          <p className="mt-1 text-[15px] text-sub">
-            {isEn ? "Your coach will plan today's workout." : "教练会根据你的记录安排今天的训练。"}
-          </p>
-          <Link
-            href={coachLink(
-              isEn
-                ? "I don't know what to train today, please decide based on my history."
-                : "我不知道今天该练什么,你根据我的记录帮我决定吧",
-            )}
-            className={`${btnPrimary} mt-4 w-full py-3.5 text-[17px]`}
-          >
-            {isEn ? "Start today's workout" : "开始今天的训练"}
-          </Link>
-        </Card>
+        <Link
+          href={coachLink(
+            isEn
+              ? "I don't know what to train today, please decide based on my history."
+              : "我不知道今天该练什么,你根据我的记录帮我决定吧",
+          )}
+          className={`${btnPrimary} w-full py-4 text-[17px]`}
+        >
+          {isEn ? "Start workout" : "开始训练"}
+        </Link>
       )}
 
       {!active && (
         <section>
-          <SectionTitle>{isEn ? "Or pick a body part" : "或者选一个部位"}</SectionTitle>
-          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
+                    <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
             {GROUPS.map((g) => (
               <Link
                 key={g.id}
@@ -108,64 +101,36 @@ export default function Home() {
               router.push("/workout");
             }}
           >
-            {isEn ? "Log a workout without a plan" : "不用计划，自己记录"}
+            {isEn ? "Log without a plan" : "自己记录"}
           </button>
         </section>
       )}
 
-      {!profile.goal && (
-        <List>
+      <List>
+        <Link href="/food" className="block px-4 py-3 active:bg-bg">
+          <div className="flex items-baseline justify-between">
+            <span className="text-[16px]">{isEn ? "Nutrition" : "饮食"}</span>
+            <span className="text-[15px] text-sub tabular-nums">
+              {todayMacros.calories} / {targets.calories} kcal
+            </span>
+          </div>
+          <div className="mt-2 h-1 overflow-hidden rounded-full bg-bg">
+            <div className="h-full rounded-full bg-mint" style={{ width: `${kcalPct}%` }} />
+          </div>
+        </Link>
+        {last && (
           <Row
-            href="/me/profile"
-            icon={<Icon name="person" />}
-            title={isEn ? "Tell your coach about you" : "让教练认识你"}
-            sub={isEn ? "Goal & gym equipment · 1 min" : "填写目标和器械，只需 1 分钟"}
+            href={`/history/${last.id}`}
+            title={isEn ? "Last workout" : "上次训练"}
+            value={fmtDate(last.startedAt)}
           />
-        </List>
-      )}
-
-      {/* ---- Today at a glance ---- */}
-      <section>
-        <SectionTitle>{isEn ? "Today" : "今日"}</SectionTitle>
-        <List>
-          <Link href="/food" className="block px-4 py-3 active:bg-bg">
-            <div className="flex items-baseline justify-between">
-              <span className="text-[16px]">{isEn ? "Nutrition" : "饮食"}</span>
-              <span className="text-[15px] text-sub tabular-nums">
-                {todayMacros.calories} / {targets.calories} kcal
-              </span>
-            </div>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-bg">
-              <div className="h-full rounded-full bg-mint" style={{ width: `${kcalPct}%` }} />
-            </div>
-          </Link>
-          {last && (
-            <Row
-              href={`/history/${last.id}`}
-              title={isEn ? "Last workout" : "上次训练"}
-              value={`${last.title} · ${fmtDate(last.startedAt)}`}
-            />
-          )}
-        </List>
-      </section>
-
-      {/* ---- Tools ---- */}
-      <section>
-        <SectionTitle>{isEn ? "Tools" : "工具"}</SectionTitle>
-        <List>
-          <Row
-            href="/detective"
-            icon={<Icon name="search" />}
-            title={isEn ? "Movement Detective" : "动作侦探"}
-            sub={isEn ? "Feeling the wrong muscle?" : "练错地方、找不到发力？"}
-          />
-          <Row
-            href="/library"
-            icon={<Icon name="book" />}
-            title={isEn ? "Exercise Library" : "动作库"}
-          />
-        </List>
-      </section>
+        )}
+        <Row href="/detective" title={isEn ? "Movement Detective" : "动作侦探"} />
+        <Row href="/library" title={isEn ? "Exercise Library" : "动作库"} />
+        {!profile.goal && (
+          <Row href="/me/profile" title={isEn ? "Set your goal" : "设置目标"} />
+        )}
+      </List>
     </div>
   );
 }

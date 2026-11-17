@@ -129,7 +129,7 @@ export default function WorkoutPage() {
     <div className="space-y-3 pb-28">
       <header className="sticky top-0 z-10 -mx-4 flex items-center justify-between bg-bg/95 px-4 py-2 backdrop-blur">
         <div>
-          <div className="text-lg font-bold leading-tight">{active.title}</div>
+          <div className="text-lg font-semibold leading-tight">{active.title}</div>
           <div className="text-xs text-sub">
             ⏱ {mmss(elapsed)} · 已完成 {doneSets}/{totalSets} 组
           </div>
@@ -163,7 +163,7 @@ export default function WorkoutPage() {
             <div className="p-4 pb-2">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <div className="text-[17px] font-bold">{ex.name}</div>
+                  <div className="text-[17px] font-semibold">{ex.name}</div>
                   <div className="text-xs text-sub">
                     {ex.nameEn}
                     {ex.target ? `${ex.nameEn ? " · " : ""}目标 ${ex.target}` : ""}
@@ -207,7 +207,7 @@ export default function WorkoutPage() {
               </div>
               {ex.note && (
                 <p className="mt-2 rounded-lg bg-primary-soft px-3 py-1.5 text-xs text-primary">
-                  💡 {ex.note}
+                  {ex.note}
                 </p>
               )}
               {openGuide === i && (
@@ -263,7 +263,7 @@ export default function WorkoutPage() {
                     aria-label={`${ex.name} 第 ${k + 1} 组${s.done ? "取消完成" : "完成"}`}
                     aria-pressed={s.done}
                     onClick={() => toggleSet(i, k)}
-                    className={`h-11 rounded-xl text-lg font-bold ${
+                    className={`h-11 rounded-xl text-lg font-semibold ${
                       s.done ? "bg-mint text-white" : "border border-line bg-white text-line"
                     }`}
                   >
@@ -325,7 +325,7 @@ export default function WorkoutPage() {
           <div className="mx-auto flex max-w-md items-center justify-between rounded-2xl bg-ink px-5 py-3 text-white shadow-lg">
             <div>
               <div className="text-xs opacity-70">休息一下,喝口水</div>
-              <div className="text-2xl font-bold tabular-nums">{mmss(restLeft)}</div>
+              <div className="text-2xl font-semibold tabular-nums">{mmss(restLeft)}</div>
             </div>
             <div className="flex gap-2">
               <button
@@ -366,7 +366,7 @@ export default function WorkoutPage() {
             role="dialog"
             aria-label="结束训练"
           >
-            <h2 className="text-xl font-bold">练完啦!🎉</h2>
+            <h2 className="text-xl font-semibold">练完啦!🎉</h2>
             <p className="mt-1 text-sm text-sub">
               完成 {doneSets} 组 · 用时 {Math.max(1, Math.round(elapsed / 60))} 分钟。没打勾的组不会被记录。
             </p>

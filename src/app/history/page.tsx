@@ -52,7 +52,7 @@ function HistoryContent() {
     <div className="space-y-4">
 
       <H1
-        sub={`${profile.avatar || "🧑"} ${profile.name || "当前人物"} · ${workouts.length} 次训练 · ${meals.length} 条饮食`}
+        sub={`${workouts.length} 次训练 · ${meals.length} 条饮食`}
       >
         记录
       </H1>
@@ -68,22 +68,22 @@ function HistoryContent() {
           role="tab"
           aria-selected={tab === "workout"}
           onClick={() => setTab("workout")}
-          className={`rounded-xl py-2.5 text-sm font-bold transition ${
+          className={`rounded-xl py-2.5 text-sm font-semibold transition ${
             tab === "workout" ? "bg-primary text-white shadow-sm" : "text-sub hover:bg-soft"
           }`}
         >
-          🏋️ 训练记录 ({workouts.length})
+          训练记录 ({workouts.length})
         </button>
         <button
           type="button"
           role="tab"
           aria-selected={tab === "food"}
           onClick={() => setTab("food")}
-          className={`rounded-xl py-2.5 text-sm font-bold transition ${
+          className={`rounded-xl py-2.5 text-sm font-semibold transition ${
             tab === "food" ? "bg-primary text-white shadow-sm" : "text-sub hover:bg-soft"
           }`}
         >
-          🥗 饮食记录 ({meals.length})
+          饮食记录 ({meals.length})
         </button>
       </div>
 
@@ -98,13 +98,13 @@ function HistoryContent() {
                 router.push("/workout");
               }}
             >
-              ✍️ 自己添加记录
+              自己添加记录
             </button>
             <Link
               href={`/coach?q=${encodeURIComponent("我想补记一次训练,你来问我做了什么,帮我记录下来")}`}
               className={btnSoft}
             >
-              💬 让教练帮我记
+              让教练帮我记
             </Link>
           </div>
 
@@ -121,7 +121,7 @@ function HistoryContent() {
                   <Link href={`/history/${w.id}`} className="block">
                     <Card>
                       <div className="flex items-baseline justify-between gap-2">
-                        <div className="font-bold">{w.title}</div>
+                        <div className="font-semibold">{w.title}</div>
                         <div className="shrink-0 text-xs text-sub">{fmtDate(w.startedAt)}</div>
                       </div>
                       <p className="mt-1 text-sm text-sub">
@@ -129,9 +129,9 @@ function HistoryContent() {
                       </p>
                       <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-sub">
                         {durationMin(w) && <span>⏱ {durationMin(w)} 分钟</span>}
-                        {volume(w) > 0 && <span>🏋️ 总重量 {volume(w)} kg</span>}
-                        {w.watch?.calories && <span>🔥 {w.watch.calories} 千卡</span>}
-                        {w.watch?.avgHr && <span>❤️ {w.watch.avgHr} bpm</span>}
+                        {volume(w) > 0 && <span>总重量 {volume(w)} kg</span>}
+                        {w.watch?.calories && <span>{w.watch.calories} 千卡</span>}
+                        {w.watch?.avgHr && <span>{w.watch.avgHr} bpm</span>}
                       </div>
                     </Card>
                   </Link>
@@ -144,13 +144,13 @@ function HistoryContent() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-2">
             <Link href="/food" className={btnSoft}>
-              📸 拍照 / 记一餐
+              拍照 / 记一餐
             </Link>
             <Link
               href={`/coach?q=${encodeURIComponent("帮我看看最近的饮食和热量、蛋白质达标情况，给我下一餐建议")}`}
               className={btnSoft}
             >
-              💬 问教练怎么吃
+              问教练怎么吃
             </Link>
           </div>
 
@@ -179,7 +179,7 @@ function HistoryContent() {
           {dayEntries.length === 0 ? (
             <Card className="space-y-2">
               <p className="text-sm text-sub">
-                当前人物还没有饮食记录。点上方「📸 拍照 / 记一餐」，AI 营养师会结合你现在的身高体重自动估算热量与营养并记到这里。
+                当前人物还没有饮食记录。点上方「拍照 / 记一餐」，AI 营养师会结合你现在的身高体重自动估算热量与营养并记到这里。
               </p>
             </Card>
           ) : (
@@ -196,7 +196,7 @@ function HistoryContent() {
                     <div className="rounded-2xl bg-card px-3.5 py-2.5">
                       <div className="flex items-baseline justify-between gap-2">
                         <div className="flex items-baseline gap-2">
-                          <span className="text-sm font-bold">{fmtDateKey(dateKey)}</span>
+                          <span className="text-sm font-semibold">{fmtDateKey(dateKey)}</span>
                           <span className="text-[11px] text-sub tabular-nums">{dateKey}</span>
                         </div>
                         <Link
@@ -207,7 +207,7 @@ function HistoryContent() {
                         </Link>
                       </div>
                       <div className="mt-1.5 flex items-baseline justify-between text-xs tabular-nums">
-                        <span className="font-bold">
+                        <span className="font-semibold">
                           {dayTotals.calories} / {targets.calories} kcal
                         </span>
                         <span className="text-sub">
@@ -239,7 +239,7 @@ function HistoryContent() {
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center justify-between gap-2">
                                 <span className="rounded-full bg-primary-soft px-2 py-0.5 text-[11px] font-semibold text-primary">
-                                  {mt.emoji} {mt.label} · {time}
+                                  {mt.label} · {time}
                                 </span>
                                 <button
                                   type="button"
@@ -253,7 +253,7 @@ function HistoryContent() {
                                   删除
                                 </button>
                               </div>
-                              <div className="mt-1 font-bold">{m.summary}</div>
+                              <div className="mt-1 font-semibold">{m.summary}</div>
                               <div className="mt-1 flex flex-wrap gap-x-2.5 gap-y-0.5 text-xs text-sub tabular-nums">
                                 <span className="font-semibold text-ink">{m.calories} kcal</span>
                                 <span>蛋白 {m.protein}g</span>
@@ -265,7 +265,7 @@ function HistoryContent() {
 
                           {m.advice && (
                             <p className="rounded-xl bg-mint-soft px-3 py-2 text-xs leading-relaxed text-mint">
-                              🥗 {m.advice}
+                              {m.advice}
                             </p>
                           )}
 

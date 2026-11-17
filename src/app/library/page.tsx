@@ -44,7 +44,7 @@ function Library() {
         onClick={() => setShowImport(true)}
         className={`${btnSoft} mb-3 w-full border border-primary/25`}
       >
-        🔗 从小红书 / FB / YouTube 链接导入新动作
+        从小红书 / FB / YouTube 链接导入新动作
       </button>
 
       <div className="-mx-4 mb-2 flex gap-2 overflow-x-auto px-4 pb-1">
@@ -121,7 +121,7 @@ function Library() {
                   </div>
                 )}
                 <span className="min-w-0 flex-1">
-                  <span className="block font-bold">{e.name}</span>
+                  <span className="block font-semibold">{e.name}</span>
                   <span className="block truncate text-xs text-sub">
                     {e.nameEn || e.equipment}
                   </span>

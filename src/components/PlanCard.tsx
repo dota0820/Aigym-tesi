@@ -15,7 +15,7 @@ export default function PlanCard({ plan }: { plan: Plan }) {
     <div className="rounded-2xl bg-card">
       <div className="p-4 pb-2">
         <div className="text-xs font-semibold text-primary">训练计划 · {plan.focus}</div>
-        <div className="mt-0.5 text-lg font-bold">{plan.title}</div>
+        <div className="mt-0.5 text-lg font-semibold">{plan.title}</div>
         {plan.note && <p className="mt-1 text-sm text-sub">{plan.note}</p>}
       </div>
       <ul>
@@ -28,7 +28,7 @@ export default function PlanCard({ plan }: { plan: Plan }) {
                 onClick={() => setOpen(open === i ? null : i)}
                 aria-expanded={open === i}
               >
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-soft text-sm font-bold text-primary">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-soft text-sm font-semibold text-primary">
                   {i + 1}
                 </span>
                 <span className="min-w-0 flex-1">
@@ -45,7 +45,7 @@ export default function PlanCard({ plan }: { plan: Plan }) {
                 <div className="px-4 pb-4">
                   {it.note && (
                     <p className="mb-3 rounded-xl bg-primary-soft px-3 py-2 text-sm text-primary">
-                      💡 教练提醒:{it.note}
+                      教练提醒:{it.note}
                     </p>
                   )}
                   {g ? (

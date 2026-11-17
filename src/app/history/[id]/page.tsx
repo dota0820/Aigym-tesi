@@ -77,7 +77,7 @@ function Detail() {
         ‹ 训练记录
       </Link>
       <header>
-        <h1 className="text-2xl font-bold tracking-tight">{w.title}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">{w.title}</h1>
         <p className="mt-1 text-sm text-sub">
           {fmtDate(w.startedAt)}
           {w.feeling ? ` · 感受 ${FEELINGS[w.feeling - 1]}` : ""}
@@ -92,7 +92,7 @@ function Detail() {
           { l: "平均心率", v: w.watch?.avgHr, u: "bpm" },
         ].map((x) => (
           <div key={x.l} className="rounded-2xl bg-card py-2">
-            <div className="text-lg font-bold tabular-nums">{x.v ?? "—"}</div>
+            <div className="text-lg font-semibold tabular-nums">{x.v ?? "—"}</div>
             <div className="text-[11px] text-sub">
               {x.l}
               {x.v ? ` ${x.u}` : ""}
@@ -102,7 +102,7 @@ function Detail() {
       </div>
 
       <Link href={`/coach?q=${encodeURIComponent(reviewQ)}`} className={`${btnPrimary} w-full`}>
-        💬 让教练点评这次训练
+        让教练点评这次训练
       </Link>
 
       {w.exercises.map((e, i) => {
@@ -111,7 +111,7 @@ function Detail() {
           <Card key={i}>
             <div className="flex items-start justify-between gap-2">
               <div>
-                <div className="font-bold">{e.name}</div>
+                <div className="font-semibold">{e.name}</div>
                 {e.nameEn && <div className="text-xs text-sub">{e.nameEn}</div>}
               </div>
               {prev && <Delta cur={e} prev={prev.exercise} />}

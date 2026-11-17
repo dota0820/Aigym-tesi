@@ -290,11 +290,11 @@ function DetectiveInner() {
         <H1
           sub={
             isEn
-              ? "Understand which muscles work, spot compensation & fix form step-by-step"
-              : "排查代偿发力、解读身体感受、一步步教新手练对动作"
+              ? "Find out why it feels wrong"
+              : "找出练错地方的原因"
           }
         >
-          🕵️ {isEn ? "AI Movement Detective" : "AI 动作侦探"}
+          {isEn ? "Detective" : "动作侦探"}
         </H1>
         <div className="flex shrink-0 items-center gap-2 pt-1">
           {canSpeak() && (
@@ -353,7 +353,7 @@ function DetectiveInner() {
                 active ? "bg-primary text-white shadow-sm" : "text-sub hover:text-ink"
               }`}
             >
-              {item.icon} {isEn ? item.en : item.zh}
+              {isEn ? item.en : item.zh}
             </button>
           );
         })}
@@ -370,8 +370,8 @@ function DetectiveInner() {
               className="flex w-full items-center justify-between text-left"
             >
               <div>
-                <div className="text-sm font-bold text-ink">
-                  🧭 {isEn ? "Symptom & Muscle Check-In" : "快速描述问题（不用懂术语）"}
+                <div className="text-sm font-semibold text-ink">
+                  {isEn ? "Symptom & Muscle Check-In" : "快速描述问题（不用懂术语）"}
                 </div>
                 <div className="text-xs text-sub">
                   {isEn
@@ -386,7 +386,7 @@ function DetectiveInner() {
               <div className="mt-4 space-y-4 border-t border-line pt-3">
                 {/* 1. Exercise */}
                 <div>
-                  <label className="mb-1.5 block text-xs font-bold text-ink">
+                  <label className="mb-1.5 block text-xs font-semibold text-ink">
                     1. {isEn ? "Which exercise are you doing?" : "你在做什么动作？"}
                   </label>
                   <select
@@ -417,7 +417,7 @@ function DetectiveInner() {
                 {/* 2. Body Area (Part 2 Everyday Descriptions) */}
                 <div>
                   <div className="mb-1.5 flex items-center justify-between">
-                    <span className="text-xs font-bold text-ink">
+                    <span className="text-xs font-semibold text-ink">
                       2. {isEn ? "Where do you feel it?" : "哪里觉得累、酸或不舒服？"}
                     </span>
                     {selectedLoc && (
@@ -451,7 +451,7 @@ function DetectiveInner() {
                   </div>
                   {selectedLoc && (
                     <div className="mt-2 rounded-xl bg-primary-soft/60 p-2.5 text-xs leading-relaxed text-ink">
-                      <span className="font-bold text-primary">
+                      <span className="font-semibold text-primary">
                         {isEn ? "Possible anatomy (not a diagnosis): " : "可能涉及部位（仅作参考，非诊断）："}
                       </span>
                       {isEn ? selectedLoc.possibleStructuresEn : selectedLoc.possibleStructuresZh}
@@ -462,7 +462,7 @@ function DetectiveInner() {
                 {/* 3. Side & Sensation Type (Part 9 & Part 11) */}
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <div>
-                    <label className="mb-1.5 block text-xs font-bold text-ink">
+                    <label className="mb-1.5 block text-xs font-semibold text-ink">
                       3. {isEn ? "Which side?" : "哪一侧有感觉？"}
                     </label>
                     <div className="grid grid-cols-3 gap-1.5">
@@ -490,7 +490,7 @@ function DetectiveInner() {
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-xs font-bold text-ink">
+                    <label className="mb-1.5 block text-xs font-semibold text-ink">
                       4. {isEn ? "Type of sensation (Safety check)" : "属于哪种感觉（安全分级）？"}
                     </label>
                     <select
@@ -510,8 +510,8 @@ function DetectiveInner() {
                 {/* Part 11 Instant Safety Alert */}
                 {isSafetyStop && (
                   <div className="rounded-2xl border-2 border-red-500 bg-red-50 p-3.5 text-red-900">
-                    <div className="text-sm font-bold">
-                      🛑{" "}
+                    <div className="text-sm font-semibold">
+                      {" "}
                       {selectedSens.level === "emergency"
                         ? isEn
                           ? "STOP IMMEDIATELY — SEEK URGENT MEDICAL CARE"
@@ -528,8 +528,8 @@ function DetectiveInner() {
 
                 {selectedSens.level === "caution" && (
                   <div className="rounded-2xl border border-amber-400 bg-amber-50 p-3 text-amber-950">
-                    <div className="text-xs font-bold">
-                      ⚠️ {isEn ? "Joint Caution" : "关节不适提醒"}
+                    <div className="text-xs font-semibold">
+                      {isEn ? "Joint Caution" : "关节不适提醒"}
                     </div>
                     <p className="mt-1 text-xs leading-relaxed">
                       {isEn ? selectedSens.guidanceEn : selectedSens.guidanceZh}
@@ -540,8 +540,8 @@ function DetectiveInner() {
                 {/* Visual Anatomy Comparison */}
                 {(selectedEx || selectedLoc) && (
                   <div className="rounded-2xl border border-line bg-bg/60 p-3">
-                    <div className="mb-2 text-xs font-bold text-ink">
-                      🗺️{" "}
+                    <div className="mb-2 text-xs font-semibold text-ink">
+                      {" "}
                       {isEn
                         ? "Expected Target vs. Felt Area"
                         : "目标肌肉 vs. 你目前发酸的位置"}
@@ -561,7 +561,7 @@ function DetectiveInner() {
                   onClick={startStructuredInvestigation}
                   className={`${btnPrimary} w-full`}
                 >
-                  🔍{" "}
+                  {" "}
                   {isEn
                     ? "Start Detective Investigation"
                     : "开始动作侦探排查（一次只问 1 个关键问题）"}
@@ -614,7 +614,7 @@ function DetectiveInner() {
                     />
                   ) : m.image === "" ? (
                     <span className="text-xs text-sub">
-                      📷 {isEn ? "Photo/video analyzed" : "画面已分析"}
+                      {isEn ? "Photo/video analyzed" : "画面已分析"}
                     </span>
                   ) : null}
                   <div className="max-w-[86%] whitespace-pre-wrap rounded-2xl rounded-br-md bg-primary px-4 py-2.5 text-[15px] text-white">
@@ -702,7 +702,7 @@ function DetectiveInner() {
                   )}
                   {!media && processingMedia && (
                     <span className="flex-1 animate-pulse px-2 font-semibold text-primary">
-                      🎞️{" "}
+                      {" "}
                       {isEn
                         ? "Processing photo / extracting video frames…"
                         : "正在处理照片/抽取视频动作帧…"}
@@ -710,7 +710,7 @@ function DetectiveInner() {
                   )}
                   {!media && !processingMedia && dictation.listening && (
                     <span className="flex-1 animate-pulse px-2 font-semibold text-primary">
-                      🎙 {isEn ? "Listening…" : "正在听…说完会自动停"}
+                      {isEn ? "Listening…" : "正在听…说完会自动停"}
                     </span>
                   )}
                   {!media &&
@@ -792,8 +792,8 @@ function DetectiveInner() {
         <div className="space-y-4">
           <Card className="space-y-4">
             <div>
-              <h2 className="text-base font-bold">
-                🎥 {isEn ? "Visual Movement & Setup Lab" : "视频 / 照片动作评估"}
+              <h2 className="text-base font-semibold">
+                {isEn ? "Visual Movement & Setup Lab" : "视频 / 照片动作评估"}
               </h2>
               <p className="mt-1 text-xs leading-relaxed text-sub">
                 {isEn
@@ -803,7 +803,7 @@ function DetectiveInner() {
             </div>
 
             <div>
-              <div className="mb-1.5 text-xs font-bold text-ink">
+              <div className="mb-1.5 text-xs font-semibold text-ink">
                 1. {isEn ? "Select view or photo type" : "选择拍摄角度或照片类型"}
               </div>
               <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
@@ -826,7 +826,7 @@ function DetectiveInner() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs font-bold text-ink">
+              <label className="mb-1.5 block text-xs font-semibold text-ink">
                 2. {isEn ? "Exercise (optional)" : "对应动作（可选）"}
               </label>
               <select
@@ -846,7 +846,7 @@ function DetectiveInner() {
             </div>
 
             <div>
-              <div className="mb-1.5 text-xs font-bold text-ink">
+              <div className="mb-1.5 text-xs font-semibold text-ink">
                 3. {isEn ? "Upload photo or video" : "上传照片或短视频"}
               </div>
               <input
@@ -894,7 +894,7 @@ function DetectiveInner() {
                   className="flex w-full flex-col items-center justify-center gap-1.5 rounded-2xl border-2 border-dashed border-line bg-bg px-4 py-8 text-center active:bg-primary-soft/30"
                 >
                   <span className="text-3xl">{processingMedia ? "⏳" : "📹"}</span>
-                  <span className="text-sm font-bold text-ink">
+                  <span className="text-sm font-semibold text-ink">
                     {processingMedia
                       ? isEn
                         ? "Extracting frames from video…"
@@ -914,7 +914,7 @@ function DetectiveInner() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs font-bold text-ink">
+              <label className="mb-1.5 block text-xs font-semibold text-ink">
                 4. {isEn ? "What do you feel? (optional)" : "做了之后哪里有感觉？（可选）"}
               </label>
               <input
@@ -936,7 +936,7 @@ function DetectiveInner() {
               onClick={submitVisualAnalysis}
               className={`${btnPrimary} w-full`}
             >
-              🔎 {isEn ? "Run Visual Movement Analysis" : "开始视觉动作与设置评估"}
+              {isEn ? "Run Visual Movement Analysis" : "开始视觉动作与设置评估"}
             </button>
           </Card>
 
@@ -957,8 +957,8 @@ function DetectiveInner() {
           {/* Part 2: Everyday Body Location Translator */}
           <Card className="space-y-3">
             <div>
-              <h2 className="text-base font-bold">
-                📍{" "}
+              <h2 className="text-base font-semibold">
+                {" "}
                 {isEn
                   ? "Body Location Translator (12 Everyday Descriptions)"
                   : "日常身体描述 → 肌肉线索翻译器"}
@@ -989,7 +989,7 @@ function DetectiveInner() {
 
             <div className="rounded-2xl border border-line bg-bg/60 p-3.5">
               <div className="mb-2">
-                <div className="text-sm font-bold text-ink">
+                <div className="text-sm font-semibold text-ink">
                   “{isEn ? encLoc.phraseEn : encLoc.phraseZh}”
                 </div>
                 <div className="mt-0.5 text-xs font-semibold text-primary">
@@ -1002,7 +1002,7 @@ function DetectiveInner() {
                 {isEn ? encLoc.beginnerNoteEn : encLoc.beginnerNoteZh}
               </p>
               <p className="mt-2 rounded-xl bg-card p-2 text-[11px] text-sub">
-                ⚠️{" "}
+                {" "}
                 {isEn
                   ? "These are anatomical possibilities, not confirmed diagnoses. Multiple muscles and tissues can create sensation in the same spot."
                   : "以上仅属于解剖学可能性参考，并非医学确诊；同一部位的不适可能由多块肌肉或关节结构共同造成。"}
@@ -1016,7 +1016,7 @@ function DetectiveInner() {
                 }}
                 className={`${btnSoft} mt-3 w-full py-2.5 text-xs`}
               >
-                🔍{" "}
+                {" "}
                 {isEn
                   ? "Investigate this area in Movement Detective"
                   : "带这个位置去「互动问诊」排查"}
@@ -1027,8 +1027,8 @@ function DetectiveInner() {
           {/* Part 3, 8, 12: 32 Exercise Biomechanics & Muscle Feeling Education */}
           <div className="space-y-3">
             <div>
-              <h2 className="text-base font-bold">
-                🧬{" "}
+              <h2 className="text-base font-semibold">
+                {" "}
                 {isEn
                   ? "32-Exercise Biomechanics & Muscle Feeling Guide"
                   : "32 个核心动作生物力学与发力教育库"}
@@ -1073,7 +1073,7 @@ function DetectiveInner() {
                       className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left"
                     >
                       <div className="min-w-0">
-                        <div className="font-bold text-ink">
+                        <div className="font-semibold text-ink">
                           {isEn ? ex.nameEn : `${ex.nameZh} · ${ex.nameEn}`}
                         </div>
                         <div className="truncate text-xs text-sub">
@@ -1115,8 +1115,8 @@ function DetectiveInner() {
 
                         {/* Part 8: Muscle Feeling Education */}
                         <div className="space-y-1.5 rounded-2xl bg-mint-soft/60 p-3 text-ink">
-                          <div className="font-bold text-mint">
-                            💡{" "}
+                          <div className="font-semibold text-mint">
+                            {" "}
                             {isEn
                               ? "Muscle Feeling Education"
                               : "肌肉感受教育（正常 vs 紧张）"}
@@ -1143,8 +1143,8 @@ function DetectiveInner() {
 
                         {/* Technique Rules */}
                         <div>
-                          <div className="mb-1 font-bold text-ink">
-                            ✅ {isEn ? "Key Technique Rules" : "关键动作规则"}
+                          <div className="mb-1 font-semibold text-ink">
+                            {isEn ? "Key Technique Rules" : "关键动作规则"}
                           </div>
                           <ul className="list-disc space-y-1 pl-4 text-ink">
                             {(isEn ? ex.techniqueRulesEn : ex.techniqueRulesZh).map(
@@ -1161,8 +1161,8 @@ function DetectiveInner() {
                             key={comp.id}
                             className="space-y-1.5 rounded-2xl border border-primary/25 bg-primary-soft/40 p-3"
                           >
-                            <div className="font-bold text-primary">
-                              🕵️ {isEn ? "Common Compensation: " : "常见代偿模式："}
+                            <div className="font-semibold text-primary">
+                              {isEn ? "Common Compensation: " : "常见代偿模式："}
                               {isEn ? comp.symptomEn : comp.symptomZh}
                             </div>
                             <p>
@@ -1204,7 +1204,7 @@ function DetectiveInner() {
                             }}
                             className={`${btnPrimary} flex-1 py-2.5 text-xs`}
                           >
-                            🔍{" "}
+                            {" "}
                             {isEn
                               ? "Investigate My Form"
                               : "排查我做这个动作的问题"}
@@ -1213,7 +1213,7 @@ function DetectiveInner() {
                             href={`/library/${ex.libraryId}`}
                             className={`${btnGhost} flex-1 py-2.5 text-xs`}
                           >
-                            📖 {isEn ? "View Step Guide & GIF" : "看动作动图与步骤"}
+                            {isEn ? "View Step Guide & GIF" : "看动作动图与步骤"}
                           </Link>
                         </div>
                       </div>
