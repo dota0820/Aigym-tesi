@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import ImportExerciseModal from "@/components/ImportExerciseModal";
+import KnowledgeView from "@/components/KnowledgeView";
 import { btnSoft, H1 } from "@/components/ui";
 import {
   anySubLabel,
@@ -13,6 +14,7 @@ import {
   type ExtendedLibGroup,
 } from "@/lib/exercise-lookup";
 import { subsFor } from "@/lib/exercises";
+import { KNOWLEDGE_ARTICLES } from "@/lib/knowledge";
 import { useApp } from "@/lib/store";
 import { GROUPS, MUSCLE_LABEL } from "@/lib/types";
 
@@ -28,6 +30,11 @@ function Library() {
   const { customExercises } = useApp();
   const [showImport, setShowImport] = useState(false);
 
+  const tab = params.get("tab") === "guide" ? "guide" : "exercises";
+  const setTab = (next: "exercises" | "guide") => {
+    router.replace(next === "guide" ? "/library?tab=guide" : "/library", { scroll: false });
+  };
+
   const g: ExtendedLibGroup = TABS.find((x) => x.id === params.get("g"))?.id ?? "back";
   const subs = g === "custom" ? [] : subsFor(g);
   const sub = subs.find((x) => x.id === params.get("s"))?.id ?? "";
@@ -37,8 +44,42 @@ function Library() {
 
   return (
     <div>
-      <H1>动作库</H1>
+      <H1>{tab === "guide" ? "发力避坑" : "动作库"}</H1>
 
+      {/* Dual tab selector: Exercise Library vs Beginner Knowledge Guide */}
+      <div
+        role="tablist"
+        aria-label="动作库视图"
+        className="mb-3 grid grid-cols-2 gap-1.5 rounded-2xl border border-line bg-white p-1"
+      >
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "exercises"}
+          onClick={() => setTab("exercises")}
+          className={`rounded-xl py-2.5 text-sm font-bold transition ${
+            tab === "exercises" ? "bg-primary text-white shadow-sm" : "text-sub hover:bg-soft"
+          }`}
+        >
+          📖 动作示范
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "guide"}
+          onClick={() => setTab("guide")}
+          className={`rounded-xl py-2.5 text-sm font-bold transition ${
+            tab === "guide" ? "bg-primary text-white shadow-sm" : "text-sub hover:bg-soft"
+          }`}
+        >
+          💡 发力避坑 ({KNOWLEDGE_ARTICLES.length})
+        </button>
+      </div>
+
+      {tab === "guide" ? (
+        <KnowledgeView />
+      ) : (
+        <>
       <button
         type="button"
         onClick={() => setShowImport(true)}
@@ -153,6 +194,8 @@ function Library() {
       <p className="mt-4 text-center text-[11px] text-sub">
         内置示范照片来自公共领域的 free-exercise-db 开源动作库
       </p>
+        </>
+      )}
 
       {showImport && (
         <ImportExerciseModal
